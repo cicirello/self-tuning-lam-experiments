@@ -118,6 +118,7 @@ public class SelfTuningModifiedLamTests {
 		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
 		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
 		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
+		double alpha = 0.2;
 		m.init(1000);
 		double expected = LAM_RATE_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1000; i++) {
@@ -133,7 +134,7 @@ public class SelfTuningModifiedLamTests {
 					assertTrue("temperature should decrease if acceptRate is too low", t1 < t0);
 			}
 			if (i >= 10) {
-				expected = 0.998 * expected + 0.002;
+				expected = (1-alpha) * expected + alpha;
 			}
 		}
 		m.init(1000);
@@ -155,10 +156,11 @@ public class SelfTuningModifiedLamTests {
 					assertTrue("temperature should decrease if acceptRate is too low", t1 < t0);
 			}
 			if (i >= 10) {
-				expected = 0.998 * expected + 0.002;
+				expected = (1-alpha) * expected + alpha;
 			}
 		}
 		m.init(10000);
+		alpha = 2.0 / 11.0;
 		expected = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1600; i++) {
 			double t0 = m.getTemperature();
@@ -173,10 +175,11 @@ public class SelfTuningModifiedLamTests {
 					assertTrue("temperature should decrease if acceptRate is too low", t1 < t0);
 			}
 			if (i >= 10) {
-				expected = 0.998 * expected + 0.002;
+				expected = (1-alpha) * expected + alpha;
 			}
 		}		
 		m.init(1000);
+		alpha = 0.2;
 		expected = LAM_RATE_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1000; i++) {
 			double t0 = m.getTemperature();
@@ -191,7 +194,7 @@ public class SelfTuningModifiedLamTests {
 			// Unlike prior cases, we can't check for proper temperature shift
 			// as this case will force temperature to infinity.
 			if (i >= 10) {
-				expected = 0.998 * expected;
+				expected = (1-alpha) * expected;
 			}
 		}	
 		final int RUN_LENGTH = 1000;
@@ -213,8 +216,60 @@ public class SelfTuningModifiedLamTests {
 	}
 	
 	@Test
-	public void testGenerateConstants() {
+	public void testTemperatureInitialization() {
+		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
+		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
+		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
 		
+		// Tests with 1000 evals for 0.01 percent of run case
+		m.init(1000);
+		for (int i = 0; i < 10; i++) {
+			m.accept(10+i, 20);
+		}
+		double expected = 5.5 * 0.18987910472222955;
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		m.init(1000);
+		for (int i = 0; i < 10; i++) {
+			m.accept(10+i, 9);
+		}
+		expected = -5.5 / Math.log(LAM_RATE_ONE_PERCENT_OF_RUN);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		m.init(1000);
+		for (int i = 0; i < 10; i++) {
+			if (i%2==0) m.accept(10+i, 9);
+			else m.accept(9+i, 20);
+		}
+		expected = -5.5 / Math.log(2*LAM_RATE_ONE_PERCENT_OF_RUN-1);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		
+		// Tests with 10000 evals for 0.001 percent of run case
+		m.init(10000);
+		for (int i = 0; i < 10; i++) {
+			m.accept(10+i, 20);
+		}
+		expected = -5.5 / Math.log(11*LAM_RATE_POINT_ONE_PERCENT_OF_RUN-10.0);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		m.init(10000);
+		for (int i = 0; i < 10; i++) {
+			m.accept(10+i, 9);
+		}
+		expected = -5.5 / Math.log(LAM_RATE_POINT_ONE_PERCENT_OF_RUN);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		m.init(10000);
+		for (int i = 0; i < 10; i++) {
+			if (i%2==0) m.accept(10+i, 9);
+			else m.accept(9+i, 20);
+		}
+		expected = -5.5 / Math.log(2*LAM_RATE_POINT_ONE_PERCENT_OF_RUN-1);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		
+		// Tests with 100000 evals for 0.001 percent of run case
+		m.init(100000);
+		for (int i = 0; i < 100; i++) {
+			m.accept(10+i, 110);
+		}
+		expected = 50.5 * 0.3141120890121576;
+		assertEquals(expected, m.getTemperature(), EPSILON);
 	}
 	
 }

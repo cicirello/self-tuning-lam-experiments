@@ -99,6 +99,8 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	private int sameCostCount;
 	private int betterCostCount;
 	
+	private double alpha;
+	
 	private int lastMaxEvals;
 	
 	private static final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
@@ -133,7 +135,18 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 			// These don't change during the run, and only depend
 			// on maxEvals.  So initialize only if run length
 			// has changed.
-			phase0 = maxEvals * (maxEvals >= 10000 ? 0.001 : 0.01);
+			
+			if (maxEvals >= 10000) {
+				phase0 = 0.001 * maxEvals;
+				
+				// Set alpha for a 0.001N-"day" exponential moving average
+				alpha = 2.0 / (1.0 + phase0);
+			} else {
+				phase0 = 0.01 * maxEvals;
+				
+				// Set alpha to a 9 "day" exponential moving average
+				alpha = 0.2;
+			}
 			phase1 = 0.15 * maxEvals;
 			phase2 = 0.65 * maxEvals;
 			multPhase1 = Math.pow(560, -1.0/phase1);
@@ -172,35 +185,39 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 			sameCostCount++;
 		}
 		if (iterationCount + 1 > phase0) {
-			int acceptedCount = sameCostCount + betterCostCount;
-			double initialAcceptanceRate = (acceptedCount != iterationCount)
-				? ((double)acceptedCount) / iterationCount
-				: acceptedCount / (1.0 + iterationCount);
-			// if all of the tuning samples had same cost (e.g., starting on
-			// a plateau), we assume an average cost delta equal to 1,
-			// which for an integer-cost objective function is the smallest
-			// possible non-zero cost difference.
-			double costAverage = iterationCount == sameCostCount 
-				? 1 : deltaSum / (iterationCount - sameCostCount);
-			if (initialAcceptanceRate < acceptRate) {
-				t = -costAverage / 
-					Math.log((acceptRate - initialAcceptanceRate) / 
-					(1.0 - initialAcceptanceRate));
-			} else {
-				// If the tuning samples have an approximated aceptance rate
-				// greater than or equal to the initial Lam rate, we assume that
-				// it is 0.001 less than the initial Lam rate when computing an initial
-				// temperature.
-				t = costAverage * (lastMaxEvals >= 10000 ? 0.3141120890121576 : 0.18987910472222955);
-				// Logically equivalent to:
-				// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
-			}
+			initializeTemperature();
+		}
+	}
+	
+	private void initializeTemperature() {
+		int acceptedCount = sameCostCount + betterCostCount;
+		double initialAcceptanceRate = (acceptedCount != iterationCount)
+			? ((double)acceptedCount) / iterationCount
+			: acceptedCount / (1.0 + iterationCount);
+		// if all of the tuning samples had same cost (e.g., starting on
+		// a plateau), we assume an average cost delta equal to 1,
+		// which for an integer-cost objective function is the smallest
+		// possible non-zero cost difference.
+		double costAverage = iterationCount == sameCostCount 
+			? 1 : deltaSum / (iterationCount - sameCostCount);
+		if (initialAcceptanceRate < acceptRate) {
+			t = -costAverage / 
+				Math.log((acceptRate - initialAcceptanceRate) / 
+				(1.0 - initialAcceptanceRate));
+		} else {
+			// If the tuning samples have an approximated aceptance rate
+			// greater than or equal to the initial Lam rate, we assume that
+			// it is 0.001 less than the initial Lam rate when computing an initial
+			// temperature.
+			t = costAverage * (lastMaxEvals >= 10000 ? 0.3141120890121576 : 0.18987910472222955);
+			// Logically equivalent to:
+			// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
 		}
 	}
 	
 	private void updateSchedule(boolean doAccept) {
-		if (doAccept) acceptRate = 0.998 * acceptRate + 0.002;	
-		else acceptRate = 0.998 * acceptRate;
+		if (doAccept) acceptRate = (1 - alpha) * acceptRate + alpha;	
+		else acceptRate = (1 - alpha) * acceptRate;
 		
 		if (iterationCount <= phase1) {
 			// Original Modified Lam schedule indicates that targetRate should 
