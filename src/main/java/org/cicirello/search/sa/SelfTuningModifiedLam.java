@@ -118,9 +118,9 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	@Override
 	public void init(int maxEvals) {
 		if (maxEvals >= 10000) {
-			acceptRate = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
+			targetRate = acceptRate = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
 		} else {
-			acceptRate = LAM_RATE_ONE_PERCENT_OF_RUN;
+			targetRate = acceptRate = LAM_RATE_ONE_PERCENT_OF_RUN;
 		}
 		termPhase1 = acceptRate - 0.44;
 		sameCostCount = 0;
@@ -128,7 +128,6 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 		deltaSum = 0.0;
 		// very very short runs won't have a phase 0, so default to initial t=0.5
 		t = 0.5;
-		targetRate = 1.0;
 		iterationCount = 0;
 		if (lastMaxEvals != maxEvals) {
 			// These don't change during the run, and only depend
@@ -164,28 +163,37 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	
 	private void doPhaseZeroUpdate(double neighborCost, double currentCost) {
 		double costDelta = currentCost - neighborCost;
-		if (costDelta == 0.0) {
-			sameCostCount++;
-		} else if (costDelta > 0.0) {
+		if (costDelta > 0.0) {
 			betterCostCount++;
 			deltaSum += costDelta;
-		} else {
+		} else if (costDelta < 0.0) {
 			deltaSum -= costDelta;
+		} else {
+			sameCostCount++;
 		}
 		if (iterationCount + 1 > phase0) {
 			int acceptedCount = sameCostCount + betterCostCount;
 			double initialAcceptanceRate = (acceptedCount != iterationCount)
 				? ((double)acceptedCount) / iterationCount
 				: acceptedCount / (1.0 + iterationCount);
+			// if all of the tuning samples had same cost (e.g., starting on
+			// a plateau), we assume an average cost delta equal to 1,
+			// which for an integer-cost objective function is the smallest
+			// possible non-zero cost difference.
 			double costAverage = iterationCount == sameCostCount 
-				? 0.001 : deltaSum / (iterationCount - sameCostCount);
+				? 1 : deltaSum / (iterationCount - sameCostCount);
 			if (initialAcceptanceRate < acceptRate) {
 				t = -costAverage / 
 					Math.log((acceptRate - initialAcceptanceRate) / 
 					(1.0 - initialAcceptanceRate));
 			} else {
-				// assume the equally likely random neighbor is better case
-				t = -costAverage / Math.log(2*acceptRate - 1.0);
+				// If the tuning samples have an approximated aceptance rate
+				// greater than or equal to the initial Lam rate, we assume that
+				// it is 0.001 less than the initial Lam rate when computing an initial
+				// temperature.
+				t = costAverage * (lastMaxEvals >= 10000 ? 0.3141120890121576 : 0.18987910472222955);
+				// Logically equivalent to:
+				// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
 			}
 		}
 	}

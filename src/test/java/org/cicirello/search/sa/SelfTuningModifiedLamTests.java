@@ -38,7 +38,7 @@ public class SelfTuningModifiedLamTests {
 		for (int i = 0; i < 10; i++) mOriginal.accept(3, 2);
 		SelfTuningModifiedLam m = mOriginal.split();
 		m.init(100);
-		assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
+		//assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
 		for (int i = 0; i < 15; i++) m.accept(3, 2);
 		assertEquals("target rate end of phase 1", 0.441, m.getTargetRate(), EPSILON);
 		m.accept(3, 2);
@@ -53,10 +53,13 @@ public class SelfTuningModifiedLamTests {
 	
 	@Test
 	public void testTargetRate() {
+		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
+		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
 		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
 		m.init(100);
-		assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
-		for (int i = 0; i < 15; i++) m.accept(3, 2);
+		m.accept(3, 2);
+		assertEquals("target rate after tuning", LAM_RATE_ONE_PERCENT_OF_RUN, m.getTargetRate(), EPSILON);
+		for (int i = 1; i < 15; i++) m.accept(3, 2);
 		assertEquals("target rate end of phase 1", 0.441, m.getTargetRate(), EPSILON);
 		m.accept(3, 2);
 		assertEquals("target rate start of phase 2", 0.44, m.getTargetRate(), EPSILON);
@@ -68,8 +71,9 @@ public class SelfTuningModifiedLamTests {
 		assertEquals("target rate end of phase 3", 0.001, m.getTargetRate(), EPSILON);
 		// repeating to make sure init resets stuff correctly
 		m.init(100);
-		assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
-		for (int i = 0; i < 15; i++) m.accept(3, 2);
+		m.accept(3, 2);
+		assertEquals("target rate after tuning", LAM_RATE_ONE_PERCENT_OF_RUN, m.getTargetRate(), EPSILON);
+		for (int i = 1; i < 15; i++) m.accept(3, 2);
 		assertEquals("target rate end of phase 1", 0.441, m.getTargetRate(), EPSILON);
 		m.accept(3, 2);
 		assertEquals("target rate start of phase 2", 0.44, m.getTargetRate(), EPSILON);
@@ -81,8 +85,9 @@ public class SelfTuningModifiedLamTests {
 		assertEquals("target rate end of phase 3", 0.001, m.getTargetRate(), EPSILON);
 		// now repeating with longer run length
 		m.init(1000);
-		assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
-		for (int i = 0; i < 150; i++) m.accept(3, 2);
+		for (int i = 0; i < 10; i++) m.accept(3, 2);
+		assertEquals("target rate after tuning", LAM_RATE_ONE_PERCENT_OF_RUN, m.getTargetRate(), EPSILON);
+		for (int i = 10; i < 150; i++) m.accept(3, 2);
 		assertEquals("target rate end of phase 1", 0.441, m.getTargetRate(), EPSILON);
 		m.accept(3, 2);
 		assertEquals("target rate start of phase 2", 0.44, m.getTargetRate(), EPSILON);
@@ -94,8 +99,9 @@ public class SelfTuningModifiedLamTests {
 		assertEquals("target rate end of phase 3", 0.001, m.getTargetRate(), EPSILON);
 		// now repeating with an even longer run length
 		m.init(10000);
-		assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
-		for (int i = 0; i < 1500; i++) m.accept(3, 2);
+		for (int i = 0; i < 10; i++) m.accept(3, 2);
+		assertEquals("target rate after tuning", LAM_RATE_POINT_ONE_PERCENT_OF_RUN, m.getTargetRate(), EPSILON);
+		for (int i = 10; i < 1500; i++) m.accept(3, 2);
 		assertEquals("target rate end of phase 1", 0.441, m.getTargetRate(), EPSILON);
 		m.accept(3, 2);
 		assertEquals("target rate start of phase 2", 0.44, m.getTargetRate(), EPSILON);
@@ -154,7 +160,7 @@ public class SelfTuningModifiedLamTests {
 		}
 		m.init(10000);
 		expected = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 1600; i++) {
 			double t0 = m.getTemperature();
 			assertEquals("testing acceptRate estimation, i="+i, expected, m.getAcceptRate(), EPSILON);
 			// force an acceptance with neighbor cost <= current cost
@@ -204,6 +210,11 @@ public class SelfTuningModifiedLamTests {
 		}
 		assertTrue("Verify accepts some higher cost neighbors", count > 0);
 		assertTrue("Verify rejects some higher cost neighbors", count < RUN_LENGTH);
+	}
+	
+	@Test
+	public void testGenerateConstants() {
+		
 	}
 	
 }
