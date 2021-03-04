@@ -100,6 +100,7 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	private int betterCostCount;
 	
 	private double alpha;
+	private double beta;
 	
 	private int lastMaxEvals;
 	
@@ -213,6 +214,13 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 			// Logically equivalent to:
 			// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
 		}
+		
+		if (lastMaxEvals >= 10000) {
+			beta = Math.pow(0.001/t, 3.003003003003003 / lastMaxEvals);
+		} else {
+			beta = Math.pow(0.001/t, 3.0303030303030303 / lastMaxEvals);
+		}
+		if (beta > 0.9999) beta = 0.9999;
 	}
 	
 	private void updateSchedule(boolean doAccept) {
@@ -242,8 +250,8 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 			targetRate = 0.44;
 		}
 		
-		if (acceptRate > targetRate) t *= 0.999;
-		else t *= 1.001001001001001; // 1.001001001001001 == 1.0 / 0.999 
+		if (acceptRate > targetRate) t *= beta;
+		else t /= beta;  
 	}
 	
 	/*
