@@ -270,6 +270,14 @@ public class SelfTuningModifiedLamTests {
 		}
 		expected = 50.5 * 0.3141120890121576;
 		assertEquals(expected, m.getTemperature(), EPSILON);
+		
+		// Tests with 1000000 evals for 0.001 percent of run case
+		m.init(1000000);
+		for (int i = 0; i < 1000; i++) {
+			m.accept(10+i, 1010);
+		}
+		expected = 500.5 * 0.3141120890121576;
+		assertEquals(expected, m.getTemperature(), EPSILON);
 	}
 	
 }
