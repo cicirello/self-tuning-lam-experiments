@@ -24,7 +24,10 @@ import org.cicirello.search.problems.OneMax;
 import org.cicirello.search.representations.BitVector;
 import org.cicirello.search.sa.ModifiedLam;
 import org.cicirello.search.sa.SimulatedAnnealing;
-import org.cicirello.search.sa.SelfTuningLam;
+import org.cicirello.search.sa.SelfTuningModifiedLam;
+import org.cicirello.search.sa.AcceptanceTracker;
+import org.cicirello.search.problems.IntegerCostFunctionScaler;
+import org.cicirello.search.SolutionCostPair;
 
 public class LamTrackingOneMax {
 	
@@ -33,7 +36,38 @@ public class LamTrackingOneMax {
 	 * @param args There are no command line arguments.
 	 */
 	public static void main(String[] args) {
+		final int RUN_LENGTH = args.length > 0 ? Integer.parseInt(args[0]) : 1000;
+		final int SCALE = args.length > 1 ? Integer.parseInt(args[1]) : 1;
 		
+		final int NUM_SAMPLES = 100;
+		
+		final int BIT_LENGTH = 20480;
+		IntegerCostFunctionScaler<BitVector> problem = new IntegerCostFunctionScaler<BitVector>(new OneMax(), SCALE);
+		final int MAX_BITS_MUTATE = 1;
+		
+		AcceptanceTracker modifiedLam = new AcceptanceTracker(new ModifiedLam());
+		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningModifiedLam());
+		
+		SimulatedAnnealing<BitVector> sa1 = new SimulatedAnnealing<BitVector>(
+			problem, 
+			new DefiniteBitFlipMutation(MAX_BITS_MUTATE),
+			new BitVectorInitializer(BIT_LENGTH),
+			modifiedLam
+		);
+		
+		SimulatedAnnealing<BitVector> sa2 = new SimulatedAnnealing<BitVector>(
+			problem, 
+			new DefiniteBitFlipMutation(MAX_BITS_MUTATE), 
+			new BitVectorInitializer(BIT_LENGTH),
+			selfTuningLam
+		);
+		
+		System.out.println("MLam\tSTLam");
+		for (int i = 0; i < NUM_SAMPLES; i++) {
+			SolutionCostPair<BitVector> solution1 = sa1.optimize(RUN_LENGTH);
+			SolutionCostPair<BitVector> solution2 = sa2.optimize(RUN_LENGTH);
+			System.out.println(solution1.getCost() + "\t" + solution2.getCost());
+		}
 	}
 	
 }
