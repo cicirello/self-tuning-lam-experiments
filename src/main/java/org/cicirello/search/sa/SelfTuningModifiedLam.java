@@ -104,8 +104,10 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	
 	private int lastMaxEvals;
 	
-	private static final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
-	private static final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
+	private static final double LAM_RATE_001 = 0.9768670788789564;
+	private static final double LAM_RATE_002 = 0.9546897506857566;
+	private static final double LAM_RATE_01 = 0.8072615745900611;
+	private static final double LAM_RATE_02 = 0.6808590431613767;
 	
 	/**
 	 * Default constructor.  The Self-Tuning Modified Lam annealing schedule,
@@ -121,9 +123,9 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	@Override
 	public void init(int maxEvals) {
 		if (maxEvals >= 10000) {
-			targetRate = acceptRate = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
+			targetRate = acceptRate = LAM_RATE_001;
 		} else {
-			targetRate = acceptRate = LAM_RATE_ONE_PERCENT_OF_RUN;
+			targetRate = acceptRate = LAM_RATE_01;
 		}
 		termPhase1 = acceptRate - 0.44;
 		sameCostCount = 0;
@@ -140,13 +142,14 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 			if (maxEvals >= 10000) {
 				phase0 = 0.001 * maxEvals;
 				
-				// Set alpha for a 0.001N-"day" exponential moving average
-				alpha = 2.0 / (1.0 + phase0);
+				// Set alpha for a 0.01N-"day" exponential moving average
+				alpha = 2.0 / (1.0 + 0.01 * maxEvals);
 			} else {
 				phase0 = 0.01 * maxEvals;
 				
-				// Set alpha to a 9 "day" exponential moving average
-				alpha = 0.2;
+				// Set alpha for a 0.01N-"day" exponential moving average,
+				// but no greater than 0.2.
+				alpha = phase0 > 9 ? 2.0 / (1.0 + phase0) : 0.2;
 			}
 			phase1 = 0.15 * maxEvals;
 			phase2 = 0.65 * maxEvals;
@@ -202,25 +205,62 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 		double costAverage = iterationCount == sameCostCount 
 			? 1 : deltaSum / (iterationCount - sameCostCount);
 		if (initialAcceptanceRate < acceptRate) {
-			t = -costAverage / 
-				Math.log((acceptRate - initialAcceptanceRate) / 
+			double denom = Math.log((acceptRate - initialAcceptanceRate) / 
 				(1.0 - initialAcceptanceRate));
+			t = -costAverage / denom;
+			
+			double dropRate = lastMaxEvals >= 10000 ? LAM_RATE_002 : LAM_RATE_02;
+			if (initialAcceptanceRate < dropRate) {
+				beta = Math.pow(
+					denom / 
+						Math.log((dropRate - initialAcceptanceRate) / 
+							(1.0 - initialAcceptanceRate)),
+					1.0 / phase0
+				);
+			} else {
+				beta = Math.pow(denom *
+					(lastMaxEvals >= 10000 ? -0.3141120890121576 
+						: -0.18987910472222955),
+					1.0 / phase0
+				);
+			}
 		} else {
-			// If the tuning samples have an approximated aceptance rate
+			// If the tuning samples have an approximated acceptance rate
 			// greater than or equal to the initial Lam rate, we assume that
 			// it is 0.001 less than the initial Lam rate when computing an initial
 			// temperature.
 			t = costAverage * (lastMaxEvals >= 10000 ? 0.3141120890121576 : 0.18987910472222955);
-			// Logically equivalent to:
+			// The above is logically equivalent to:
 			// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
+			beta = Math.pow(
+				lastMaxEvals >= 10000 ? 0.8300587656396743: 0.912935823058667,
+				1.0 / phase0
+			);
 		}
 		
+		// NEED TO CHECK IF T IS INFINITE AND SET IT FINITE
+		//if (t > 1e6) t = 1e6;
+		/*
+		double dropRate = lastMaxEvals >= 10000 ? LAM_RATE_002 : LAM_RATE_02;
+		if (initialAcceptanceRate < dropRate) {
+			beta = -costAverage / 
+				(t * Math.log((dropRate - initialAcceptanceRate) / 
+				(1.0 - initialAcceptanceRate)));
+			System.out.println("beta: " + beta + " t: " + t);
+		} else {
+			beta = costAverage * (lastMaxEvals >= 10000 ? 0.260731492877931 : 0.17334743675123146) / t;
+		}
+		//if (beta < 0.7) beta = 0.7; // ?????
+		beta = 0.999;
+		*/
+		/*
 		if (lastMaxEvals >= 10000) {
 			beta = Math.pow(0.001/t, 3.003003003003003 / lastMaxEvals);
 		} else {
 			beta = Math.pow(0.001/t, 3.0303030303030303 / lastMaxEvals);
 		}
 		if (beta > 0.9999) beta = 0.9999;
+		*/
 	}
 	
 	private void updateSchedule(boolean doAccept) {
