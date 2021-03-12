@@ -28,6 +28,7 @@ import org.cicirello.search.sa.SelfTuningModifiedLam;
 import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.problems.IntegerCostFunctionScaler;
 import org.cicirello.search.SolutionCostPair;
+import org.cicirello.search.ProgressTracker;
 
 public class LamTrackingOneMax {
 	
@@ -72,6 +73,12 @@ public class LamTrackingOneMax {
 			SolutionCostPair<BitVector> solution1 = sa1.optimize(RUN_LENGTH);
 			SolutionCostPair<BitVector> solution2 = sa2.optimize(RUN_LENGTH);
 			System.out.println(solution1.getCost() + "\t" + solution2.getCost());
+			if (solution1.getCost()==0) {
+				sa1.setProgressTracker(new ProgressTracker<BitVector>());
+			}
+			if (solution2.getCost()==0) {
+				sa2.setProgressTracker(new ProgressTracker<BitVector>());
+			}
 		}
 		System.out.println("Acceptance Rate");
 		for (int i = 0; i < RUN_LENGTH; i++) {
