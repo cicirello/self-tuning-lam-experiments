@@ -17,6 +17,7 @@ experiments: onemax.1k.1.txt onemax.10k.1.txt onemax.100k.1.txt onemax.1k.2.txt 
 .PHONY: analysis
 analysis:
 	$(py) -m pip install --user scipy
+	$(py) -m pip install --user sklearn
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.1k.1.txt
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.10k.1.txt
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.100k.1.txt
