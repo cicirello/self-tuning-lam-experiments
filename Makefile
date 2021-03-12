@@ -23,6 +23,7 @@ analysis:
 	$(py) src/analysis/AcceptanceRateStats.py onemax.1k.2.txt
 	$(py) src/analysis/AcceptanceRateStats.py onemax.10k.2.txt
 	$(py) src/analysis/AcceptanceRateStats.py onemax.100k.2.txt
+	$(py) src/analysis/AcceptanceRateStats.py onemax.1000k.2.txt
 	$(py) src/analysis/AcceptanceRateStats.py onemax.1k.3.txt
 	$(py) src/analysis/AcceptanceRateStats.py onemax.10k.3.txt
 	$(py) src/analysis/AcceptanceRateStats.py onemax.100k.3.txt
