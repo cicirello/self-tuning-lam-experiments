@@ -118,7 +118,7 @@ public class SelfTuningModifiedLamTests {
 		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
 		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
 		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
-		double alpha = 0.2;
+		double alpha = 2.0 / 11.0;
 		m.init(1000);
 		double expected = LAM_RATE_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1000; i++) {
@@ -160,7 +160,7 @@ public class SelfTuningModifiedLamTests {
 			}
 		}
 		m.init(10000);
-		alpha = 2.0 / 11.0;
+		alpha = 2.0 / 101.0;
 		expected = LAM_RATE_POINT_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1600; i++) {
 			double t0 = m.getTemperature();
@@ -179,7 +179,7 @@ public class SelfTuningModifiedLamTests {
 			}
 		}		
 		m.init(1000);
-		alpha = 0.2;
+		alpha = 2.0 / 11.0;
 		expected = LAM_RATE_ONE_PERCENT_OF_RUN;
 		for (int i = 0; i < 1000; i++) {
 			double t0 = m.getTemperature();
