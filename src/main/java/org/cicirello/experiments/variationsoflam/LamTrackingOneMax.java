@@ -41,7 +41,7 @@ public class LamTrackingOneMax {
 		
 		final int NUM_SAMPLES = 100;
 		
-		final int BITS = RUN_LENGTH >= 1000000 ? 13664 :
+		final int BITS = RUN_LENGTH >= 1000000 ? 13760 :
 			(RUN_LENGTH >= 100000 ? 6432
 			: (RUN_LENGTH >= 10000 ? 928 : 192));
 		final int BITS3 = RUN_LENGTH <= 1000 ? BITS + 128 : (RUN_LENGTH >= 100000 ? BITS + 64 : BITS + 32);
