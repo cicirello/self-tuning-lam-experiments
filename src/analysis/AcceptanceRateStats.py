@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+import sklearn.metrics
 import statistics
 import scipy.stats
 import sys
@@ -70,6 +71,32 @@ def extractRawData(filename, runLength, numRuns=100):
 
     return algNames, costs, rates
 
+def targetAcceptanceRate(runLength) :
+    """Computes the Lam annealing schedule target acceptance rate
+    throughout a run of a specified length.
+
+    Keyword arguments:
+    runLength - The run length
+    """
+    phase1 = 0.15 * runLength
+    phase2 = 0.65 * runLength
+    termPhase1 = 0.56
+    multPhase1 = 560 ** (-1.0/phase1)
+    multPhase3 = 440 ** (-1.0/(runLength-phase2))
+    targetRate = 1.0
+    track = []
+    for i in range(runLength) :
+        j = i + 1
+        if j <= phase1 :
+            termPhase1 *= multPhase1
+            targetRate = 0.44 + termPhase1
+        elif j > phase2 :
+            targetRate *= multPhase3
+        else :
+            targetRate = 0.44
+        track.append(targetRate)
+    return track
+
 if __name__ == "__main__" :
     datafile = sys.argv[1]
     numRuns = int(sys.argv[2]) if len(sys.argv) > 2 else 100
@@ -108,6 +135,26 @@ if __name__ == "__main__" :
                 statistics.stdev(costs[j]),
                 t.statistic,
                 t.pvalue))
+
+    print()
+    target = targetAcceptanceRate(runLength)
+    print("{0:9} {1:>5}".format( ##{2:>5} {3:>8}".format(
+        "Schedule",
+        ##"r",
+        "r^2"##,
+        ##"P-value"
+        ))
+    for i in range(len(algNames)) :
+        ##corr = scipy.stats.pearsonr(target, rates[i])
+        ##corr = scipy.stats.spearmanr(target, rates[i])
+        r2 = sklearn.metrics.r2_score(rates[i], target)
+        print("{0:9} {1:5.3f}".format( ##{2:5.3f} {3:8.5f}".format(
+            algNames[i],
+            r2
+            ##corr[0],
+            ##corr[0]*corr[0],
+            ##corr[1]
+            ))
 
     print()
     print()
