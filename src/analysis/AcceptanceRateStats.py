@@ -165,7 +165,7 @@ if __name__ == "__main__" :
             algLabel = "Self-Tuning Lam"
         else :
             algLabel = "Unknown"
-        line, = ax.plot(xVals, target, label="{0} observed acceptance rate".format(algLabel))
+        line, = ax.plot(xVals, rates[i], label="{0} observed acceptance rate".format(algLabel))
     ax.legend()
     matplotlib.pyplot.savefig(datafile + ".svg")
     print()
