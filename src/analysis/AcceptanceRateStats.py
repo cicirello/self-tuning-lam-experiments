@@ -20,6 +20,7 @@ import scipy.stats
 import scipy.spatial.distance
 import sys
 import math
+import matplotlib.pyplot
 
 def parseFilename(filename) :
     """Parses the filename to get the run length and
@@ -95,7 +96,7 @@ def targetAcceptanceRate(runLength) :
         else :
             targetRate = 0.44
         track.append(targetRate)
-    return track
+    return track, [i for i in range(1,runLength+1)]
 
 if __name__ == "__main__" :
     datafile = sys.argv[1]
@@ -137,7 +138,7 @@ if __name__ == "__main__" :
                 t.pvalue))
 
     print()
-    target = targetAcceptanceRate(runLength)
+    target, xVals = targetAcceptanceRate(runLength)
     print("{0:9} {1:>10} {2:>10} {3:>10}".format( 
         "Schedule",
         "maxAbsDiff",
@@ -155,6 +156,18 @@ if __name__ == "__main__" :
             euc
             ))
 
+    fig, ax = matplotlib.pyplot.subplots()
+    line, = ax.plot(xVals, target, label='The target acceptance rate')
+    for i in range(len(algNames)) :
+        if algNames[i] == "MLam" :
+            algLabel = "Modified Lam"
+        elif algNames[i] == "STLam" :
+            algLabel = "Self-Tuning Lam"
+        else :
+            algLabel = "Unknown"
+        line, = ax.plot(xVals, target, label="{0} observed acceptance rate".format(algLabel))
+    ax.legend()
+    matplotlib.pyplot.savefig(datafile + ".svg")
     print()
     print()
             
