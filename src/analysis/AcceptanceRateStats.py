@@ -15,9 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-import sklearn.metrics
 import statistics
 import scipy.stats
+import scipy.spatial.distance
 import sys
 import math
 
@@ -108,7 +108,7 @@ if __name__ == "__main__" :
     print("Run Length (in SA iterations):", runLength)
     print("Cost function scale factor:", scale)
     print()
-    print("{0:9} {1:>8} {2:>8} {3:8} {4:>8} {5:>8} {6:>8} {7:>8}".format(
+    print("{0:9} {1:>8} {2:>8} {3:8} {4:>8} {5:>8} {6:>8} {7:>20}".format(
         "Schedule1",
         "Mean",
         "StDev",
@@ -118,7 +118,7 @@ if __name__ == "__main__" :
         "t-stat",
         "P-value"
         ))
-    outputTemplate = "{0:9} {1:8.2f} {2:8.2f} {3:9} {4:8.2f} {5:8.2f} {6:8.2f} {7:8.5f}"        
+    outputTemplate = "{0:9} {1:8.2f} {2:8.2f} {3:9} {4:8.2f} {5:8.2f} {6:8.2f} {7:20}"        
     for i in range(len(algNames)-1) :
         for j in range(i+1, len(algNames)) :
             t = scipy.stats.ttest_ind(
@@ -138,22 +138,21 @@ if __name__ == "__main__" :
 
     print()
     target = targetAcceptanceRate(runLength)
-    print("{0:9} {1:>5}".format( ##{2:>5} {3:>8}".format(
+    print("{0:9} {1:>10} {2:>10} {3:>10}".format( 
         "Schedule",
-        ##"r",
-        "r^2"##,
-        ##"P-value"
+        "maxAbsDiff",
+        "sumAbsDiff",
+        "Euclidean"
         ))
     for i in range(len(algNames)) :
-        ##corr = scipy.stats.pearsonr(target, rates[i])
-        ##corr = scipy.stats.spearmanr(target, rates[i])
-        r2 = sklearn.metrics.r2_score(rates[i], target)
-        print("{0:9} {1:5.3f}".format( ##{2:5.3f} {3:8.5f}".format(
+        euc = scipy.spatial.distance.euclidean(target, rates[i])
+        maxPointDist = scipy.spatial.distance.chebyshev(target, rates[i])
+        sumAbsDiff = scipy.spatial.distance.cityblock(target, rates[i])
+        print("{0:9} {1:10.3f} {2:10.3f} {3:10.3f}".format(
             algNames[i],
-            r2
-            ##corr[0],
-            ##corr[0]*corr[0],
-            ##corr[1]
+            maxPointDist,
+            sumAbsDiff,
+            euc
             ))
 
     print()
