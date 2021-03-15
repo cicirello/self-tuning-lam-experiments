@@ -21,6 +21,7 @@ import scipy.spatial.distance
 import sys
 import math
 import matplotlib.pyplot
+from collections import deque
 
 def parseFilename(filename) :
     """Parses the filename to get the run length and
@@ -98,9 +99,40 @@ def targetAcceptanceRate(runLength) :
         track.append(targetRate)
     return track, [i for i in range(1,runLength+1)]
 
+def dataFilenameToFigureFilename(datafile) :
+    """Generates the name for the output file containing the
+    graph of the data.
+
+    Keyword arguments:
+    datafile - The data file including path
+    """
+    figureFilename = datafile + ".svg" if datafile[-4:] != ".txt" else datafile[:-3] + ".svg"
+    return figureFilename
+
+def medianSmoothing(data, k) :
+    """Smooths the data with k-median smoothing.
+
+    Keyword arguments:
+    data - a list of the data
+    k - to indicate size of smoothing window, assumed by code here to be odd
+    """
+    skip = k // 2
+    window = deque(data[:k])
+    for i in range(skip, len(data)-skip) :
+        data[i] = statistics.median(window)
+        window.popleft()
+        j = i + skip + 1
+        if j < len(data) :
+            window.append(data[j])
+    for i in range(skip) :
+        data[i] = None
+        data[-i-1] = None
+
 if __name__ == "__main__" :
     datafile = sys.argv[1]
     numRuns = int(sys.argv[2]) if len(sys.argv) > 2 else 100
+
+    figureFilename = dataFilenameToFigureFilename(datafile)
 
     runLength, scale = parseFilename(datafile)
     algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
@@ -167,7 +199,26 @@ if __name__ == "__main__" :
             algLabel = "Unknown"
         line, = ax.plot(xVals, rates[i], label="{0} observed acceptance rate".format(algLabel))
     ax.legend()
-    matplotlib.pyplot.savefig(datafile + ".svg")
+    matplotlib.pyplot.savefig(figureFilename)
+
+    fig, ax = matplotlib.pyplot.subplots()
+    line, = ax.plot(xVals, target, label='The target acceptance rate')
+    k = 3
+    skip = k // 2
+    xValSmooth = xVals[skip:-skip]
+    for i in range(len(algNames)) :
+        if algNames[i] == "MLam" :
+            algLabel = "Modified Lam"
+        elif algNames[i] == "STLam" :
+            algLabel = "Self-Tuning Lam"
+        else :
+            algLabel = "Unknown"
+        medianSmoothing(rates[i], k)
+        line, = ax.plot(xValSmooth, rates[i][skip:-skip], label="{0} observed acceptance rate".format(algLabel))
+    smoothFilename = figureFilename[:-3] + "smooth.svg"
+    ax.legend()
+    matplotlib.pyplot.savefig(smoothFilename)
+
     print()
     print()
             
