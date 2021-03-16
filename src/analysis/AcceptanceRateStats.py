@@ -97,7 +97,7 @@ def targetAcceptanceRate(runLength) :
         else :
             targetRate = 0.44
         track.append(targetRate)
-    return track, [i for i in range(1,runLength+1)]
+    return track, [i/runLength for i in range(1,runLength+1)]
 
 def dataFilenameToFigureFilename(datafile) :
     """Generates the name for the output file containing the
@@ -108,6 +108,23 @@ def dataFilenameToFigureFilename(datafile) :
     """
     figureFilename = datafile + ".svg" if datafile[-4:] != ".txt" else datafile[:-3] + ".svg"
     return figureFilename
+
+def sampleDataAlongTimeAxis(data, numPoints=100) :
+    """The raw data has samples of the acceptance rate at
+    each iteration, so for long runs, has a huge number of
+    points along the time axis, extremely difficult to plot
+    in a clear and easy to interpret manner. This function
+    samples at equal intervals along the time axis to deal
+    with this.
+
+    Keyword arguments:
+    data - the data
+    numPoints - the number of points along time axis to sample, equally distant
+    """
+    sampled = [data[0]]
+    for i in range(len(data)//100, len(data), len(data)//100) :
+        sampled.append(data[i])
+    return sampled
 
 def medianSmoothing(data, k) :
     """Smooths the data with k-median smoothing.
@@ -171,6 +188,10 @@ if __name__ == "__main__" :
 
     print()
     target, xVals = targetAcceptanceRate(runLength)
+    target = sampleDataAlongTimeAxis(target)
+    xVals = sampleDataAlongTimeAxis(xVals)
+    for i in range(len(algNames)) :
+        rates[i] = sampleDataAlongTimeAxis(rates[i])
     print("{0:9} {1:>10} {2:>10} {3:>10}".format( 
         "Schedule",
         "maxAbsDiff",
@@ -201,23 +222,28 @@ if __name__ == "__main__" :
     ax.legend()
     matplotlib.pyplot.savefig(figureFilename)
 
-    fig, ax = matplotlib.pyplot.subplots()
-    line, = ax.plot(xVals, target, label='The target acceptance rate')
-    k = 3
-    skip = k // 2
-    xValSmooth = xVals[skip:-skip]
-    for i in range(len(algNames)) :
-        if algNames[i] == "MLam" :
-            algLabel = "Modified Lam"
-        elif algNames[i] == "STLam" :
-            algLabel = "Self-Tuning Lam"
-        else :
-            algLabel = "Unknown"
-        medianSmoothing(rates[i], k)
-        line, = ax.plot(xValSmooth, rates[i][skip:-skip], label="{0} observed acceptance rate".format(algLabel))
-    smoothFilename = figureFilename[:-3] + "smooth.svg"
-    ax.legend()
-    matplotlib.pyplot.savefig(smoothFilename)
+## Previously tried smoothing the data, but this
+## is not really necessary if we sample the acceptance rates
+## a fixed (100) number of times along time axis, rather than
+## at every simulated anneal;ing iteration.
+##
+##    fig, ax = matplotlib.pyplot.subplots()
+##    line, = ax.plot(xVals, target, label='The target acceptance rate')
+##    k = 5
+##    skip = k // 2
+##    xValSmooth = xVals[skip:-skip]
+##    for i in range(len(algNames)) :
+##        if algNames[i] == "MLam" :
+##            algLabel = "Modified Lam"
+##        elif algNames[i] == "STLam" :
+##            algLabel = "Self-Tuning Lam"
+##        else :
+##            algLabel = "Unknown"
+##        medianSmoothing(rates[i], k)
+##        line, = ax.plot(xValSmooth, rates[i][skip:-skip], label="{0} observed acceptance rate".format(algLabel))
+##    smoothFilename = figureFilename[:-3] + "smooth.svg"
+##    ax.legend()
+##    matplotlib.pyplot.savefig(smoothFilename)
 
     print()
     print()
