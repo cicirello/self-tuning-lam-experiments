@@ -21,6 +21,7 @@ import scipy.spatial.distance
 import sys
 import math
 import matplotlib.pyplot
+from matplotlib.ticker import PercentFormatter
 from collections import deque
 
 def parseFilename(filename) :
@@ -192,26 +193,60 @@ if __name__ == "__main__" :
     xVals = sampleDataAlongTimeAxis(xVals)
     for i in range(len(algNames)) :
         rates[i] = sampleDataAlongTimeAxis(rates[i])
-    print("{0:9} {1:>10} {2:>10} {3:>10}".format( 
+    print("{0:9} {1:>10} {2:>10} {3:>10} {4:>10} {5:>10} {6:>10} {7:>10} {8:>10} {9:>10} {10:>10} {11:>10} {12:>10}".format( 
         "Schedule",
-        "maxAbsDiff",
-        "sumAbsDiff",
-        "Euclidean"
+        "maxDiff",
+        "sumDiff",
+        "Euclidean",
+        "maxPh1",
+        "sumPh1",
+        "EuclPh1",
+        "maxPh2",
+        "sumPh2",
+        "EuclPh2",
+        "maxPh3",
+        "sumPh3",
+        "EuclPh3"
         ))
     for i in range(len(algNames)) :
         euc = scipy.spatial.distance.euclidean(target, rates[i])
         maxPointDist = scipy.spatial.distance.chebyshev(target, rates[i])
         sumAbsDiff = scipy.spatial.distance.cityblock(target, rates[i])
-        print("{0:9} {1:10.3f} {2:10.3f} {3:10.3f}".format(
+        
+        euc1 = scipy.spatial.distance.euclidean(target[:17], rates[i][:17])
+        maxPointDist1 = scipy.spatial.distance.chebyshev(target[:17], rates[i][:17])
+        sumAbsDiff1 = scipy.spatial.distance.cityblock(target[:17], rates[i][:17])
+
+        euc2 = scipy.spatial.distance.euclidean(target[17:67], rates[i][17:67])
+        maxPointDist2 = scipy.spatial.distance.chebyshev(target[17:67], rates[i][17:67])
+        sumAbsDiff2 = scipy.spatial.distance.cityblock(target[17:67], rates[i][17:67])
+
+        euc3 = scipy.spatial.distance.euclidean(target[67:], rates[i][67:])
+        maxPointDist3 = scipy.spatial.distance.chebyshev(target[67:], rates[i][67:])
+        sumAbsDiff3 = scipy.spatial.distance.cityblock(target[67:], rates[i][67:])
+        
+        print("{0:9} {1:10.3f} {2:10.3f} {3:10.3f} {4:10.3f} {5:10.3f} {6:10.3f} {7:10.3f} {8:10.3f} {9:10.3f} {10:10.3f} {11:10.3f} {12:10.3f}".format(
             algNames[i],
             maxPointDist,
             sumAbsDiff,
-            euc
+            euc,
+            maxPointDist1,
+            sumAbsDiff1,
+            euc1,
+            maxPointDist2,
+            sumAbsDiff2,
+            euc2,
+            maxPointDist3,
+            sumAbsDiff3,
+            euc3
             ))
 
     fig, ax = matplotlib.pyplot.subplots()
+    ax.xaxis.set_major_formatter(PercentFormatter(xmax=1))
     line, = ax.plot(xVals, target, '-k', label='The target acceptance rate')
-    styles = [ ':g', '--r' ]
+    matplotlib.pyplot.xlabel('percent of run')
+    matplotlib.pyplot.ylabel('acceptance rate')
+    styles = [ ':b', '--r' ]
     for i in range(len(algNames)) :
         if algNames[i] == "MLam" :
             algLabel = "Modified Lam"
