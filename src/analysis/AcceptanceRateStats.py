@@ -210,7 +210,8 @@ if __name__ == "__main__" :
             ))
 
     fig, ax = matplotlib.pyplot.subplots()
-    line, = ax.plot(xVals, target, label='The target acceptance rate')
+    line, = ax.plot(xVals, target, '-k', label='The target acceptance rate')
+    styles = [ ':g', '--r' ]
     for i in range(len(algNames)) :
         if algNames[i] == "MLam" :
             algLabel = "Modified Lam"
@@ -218,7 +219,7 @@ if __name__ == "__main__" :
             algLabel = "Self-Tuning Lam"
         else :
             algLabel = "Unknown"
-        line, = ax.plot(xVals, rates[i], label="{0} observed acceptance rate".format(algLabel))
+        line, = ax.plot(xVals, rates[i], styles[i], label="{0} observed acceptance rate".format(algLabel))
     ax.legend()
     matplotlib.pyplot.savefig(figureFilename)
 
