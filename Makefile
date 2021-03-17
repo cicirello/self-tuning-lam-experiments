@@ -37,6 +37,21 @@ analysis:
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.10k.10.txt
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.100k.10.txt
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.1000k.10.txt
+
+.PHONY: prelimAnalysis
+prelimAnalysis:
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.1000k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.1k.10.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.10k.10.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.100k.10.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}prelim.1000k.10.txt
+
+
 	
 onemax.1k.1.txt:
 	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax > onemax.1k.1.txt
