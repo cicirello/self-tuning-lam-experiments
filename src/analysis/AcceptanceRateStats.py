@@ -123,7 +123,7 @@ def sampleDataAlongTimeAxis(data, numPoints=100) :
     numPoints - the number of points along time axis to sample, equally distant
     """
     sampled = [data[0]]
-    for i in range(len(data)//100, len(data), len(data)//100) :
+    for i in range(len(data)//numPoints, len(data), len(data)//numPoints) :
         sampled.append(data[i])
     return sampled
 
@@ -159,7 +159,7 @@ if __name__ == "__main__" :
     print("Run Length (in SA iterations):", runLength)
     print("Cost function scale factor:", scale)
     print()
-    print("{0:9} {1:>8} {2:>8} {3:8} {4:>8} {5:>8} {6:>8} {7:>20}".format(
+    print("{8:9} {0:9} {1:>8} {2:>8} {3:8} {4:>8} {5:>8} {6:>8} {7:>20}".format(
         "Schedule1",
         "Mean",
         "StDev",
@@ -167,9 +167,10 @@ if __name__ == "__main__" :
         "Mean",
         "StDev",
         "t-stat",
-        "P-value"
+        "P-value",
+        "Measure"
         ))
-    outputTemplate = "{0:9} {1:8.2f} {2:8.2f} {3:9} {4:8.2f} {5:8.2f} {6:8.2f} {7:20}"        
+    outputTemplate = "{8:9} {0:9} {1:8.2f} {2:8.2f} {3:9} {4:8.2f} {5:8.2f} {6:8.2f} {7:20}"        
     for i in range(len(algNames)-1) :
         for j in range(i+1, len(algNames)) :
             t = scipy.stats.ttest_ind(
@@ -185,61 +186,213 @@ if __name__ == "__main__" :
                 statistics.mean(costs[j]),
                 statistics.stdev(costs[j]),
                 t.statistic,
-                t.pvalue))
+                t.pvalue,
+                "CostFunc"))
 
     print()
     target, xVals = targetAcceptanceRate(runLength)
-    target = sampleDataAlongTimeAxis(target)
-    xVals = sampleDataAlongTimeAxis(xVals)
+    target = sampleDataAlongTimeAxis(target, 200)
+    xVals = sampleDataAlongTimeAxis(xVals, 200)
     for i in range(len(algNames)) :
-        rates[i] = sampleDataAlongTimeAxis(rates[i])
-    print("{0:9} {1:>10} {2:>10} {3:>10} {4:>10} {5:>10} {6:>10} {7:>10} {8:>10} {9:>10} {10:>10} {11:>10} {12:>10}".format( 
-        "Schedule",
-        "maxDiff",
-        "sumDiff",
-        "Euclidean",
-        "maxPh1",
-        "sumPh1",
-        "EuclPh1",
-        "maxPh2",
-        "sumPh2",
-        "EuclPh2",
-        "maxPh3",
-        "sumPh3",
-        "EuclPh3"
-        ))
-    for i in range(len(algNames)) :
-        euc = scipy.spatial.distance.euclidean(target, rates[i])
-        maxPointDist = scipy.spatial.distance.chebyshev(target, rates[i])
-        sumAbsDiff = scipy.spatial.distance.cityblock(target, rates[i])
-        
-        euc1 = scipy.spatial.distance.euclidean(target[:17], rates[i][:17])
-        maxPointDist1 = scipy.spatial.distance.chebyshev(target[:17], rates[i][:17])
-        sumAbsDiff1 = scipy.spatial.distance.cityblock(target[:17], rates[i][:17])
+        rates[i] = sampleDataAlongTimeAxis(rates[i], 200)
 
-        euc2 = scipy.spatial.distance.euclidean(target[17:67], rates[i][17:67])
-        maxPointDist2 = scipy.spatial.distance.chebyshev(target[17:67], rates[i][17:67])
-        sumAbsDiff2 = scipy.spatial.distance.cityblock(target[17:67], rates[i][17:67])
+    absDiff = [ [math.fabs(target[j]-x) for j, x in enumerate(rates[i])] for i in range(len(algNames)) ]
+    sqDiff = [ list(map(lambda x : x*x, absDiff[i])) for i in range(len(algNames)) ]
+    t_MAD = scipy.stats.ttest_ind(
+        absDiff[0],
+        absDiff[1],
+        equal_var = False
+        )
 
-        euc3 = scipy.spatial.distance.euclidean(target[67:], rates[i][67:])
-        maxPointDist3 = scipy.spatial.distance.chebyshev(target[67:], rates[i][67:])
-        sumAbsDiff3 = scipy.spatial.distance.cityblock(target[67:], rates[i][67:])
-        
-        print("{0:9} {1:10.3f} {2:10.3f} {3:10.3f} {4:10.3f} {5:10.3f} {6:10.3f} {7:10.3f} {8:10.3f} {9:10.3f} {10:10.3f} {11:10.3f} {12:10.3f}".format(
-            algNames[i],
-            maxPointDist,
-            sumAbsDiff,
-            euc,
-            maxPointDist1,
-            sumAbsDiff1,
-            euc1,
-            maxPointDist2,
-            sumAbsDiff2,
-            euc2,
-            maxPointDist3,
-            sumAbsDiff3,
-            euc3
-            ))
+    t_MSE = scipy.stats.ttest_ind(
+        sqDiff[0],
+        sqDiff[1],
+        equal_var = False
+        )
+
+    maxAbsDiff = [ max(absDiff[i]) for i in range(len(algNames)) ]
+
+    outputTemplate = "{8:9} {0:9} {1:8.6f} {2:8.6f} {3:9} {4:8.6f} {5:8.6f} {6:8.2f} {7:20}"        
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(sqDiff[0]),
+        statistics.stdev(sqDiff[0]),
+        algNames[1],
+        statistics.mean(sqDiff[1]),
+        statistics.stdev(sqDiff[1]),
+        t_MSE.statistic,
+        t_MSE.pvalue,
+        "MSE"))
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(absDiff[0]),
+        statistics.stdev(absDiff[0]),
+        algNames[1],
+        statistics.mean(absDiff[1]),
+        statistics.stdev(absDiff[1]),
+        t_MAD.statistic,
+        t_MAD.pvalue,
+        "MAD"))
+
+    # PHASE 1: first 15% of run
+    t_MAD = scipy.stats.ttest_ind(
+        absDiff[0][:31],
+        absDiff[1][:31],
+        equal_var = False
+        )
+
+    t_MSE = scipy.stats.ttest_ind(
+        sqDiff[0][:31],
+        sqDiff[1][:31],
+        equal_var = False
+        )
+
+    maxAbsDiff = [ max(absDiff[i][:31]) for i in range(len(algNames)) ]
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(sqDiff[0][:31]),
+        statistics.stdev(sqDiff[0][:31]),
+        algNames[1],
+        statistics.mean(sqDiff[1][:31]),
+        statistics.stdev(sqDiff[1][:31]),
+        t_MSE.statistic,
+        t_MSE.pvalue,
+        "MSE.ph1"))
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(absDiff[0][:31]),
+        statistics.stdev(absDiff[0][:31]),
+        algNames[1],
+        statistics.mean(absDiff[1][:31]),
+        statistics.stdev(absDiff[1][:31]),
+        t_MAD.statistic,
+        t_MAD.pvalue,
+        "MAD.ph1"))
+
+    # PHASE 2: next 50% of run
+    t_MAD = scipy.stats.ttest_ind(
+        absDiff[0][31:131],
+        absDiff[1][31:131],
+        equal_var = False
+        )
+
+    t_MSE = scipy.stats.ttest_ind(
+        sqDiff[0][31:131],
+        sqDiff[1][31:131],
+        equal_var = False
+        )
+
+    maxAbsDiff = [ max(absDiff[i][31:131]) for i in range(len(algNames)) ]
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(sqDiff[0][31:131]),
+        statistics.stdev(sqDiff[0][31:131]),
+        algNames[1],
+        statistics.mean(sqDiff[1][31:131]),
+        statistics.stdev(sqDiff[1][31:131]),
+        t_MSE.statistic,
+        t_MSE.pvalue,
+        "MSE.ph2"))
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(absDiff[0][31:131]),
+        statistics.stdev(absDiff[0][31:131]),
+        algNames[1],
+        statistics.mean(absDiff[1][31:131]),
+        statistics.stdev(absDiff[1][31:131]),
+        t_MAD.statistic,
+        t_MAD.pvalue,
+        "MAD.ph2"))
+
+    # PHASE 3: last 35% of run
+    t_MAD = scipy.stats.ttest_ind(
+        absDiff[0][131:],
+        absDiff[1][131:],
+        equal_var = False
+        )
+
+    t_MSE = scipy.stats.ttest_ind(
+        sqDiff[0][131:],
+        sqDiff[1][131:],
+        equal_var = False
+        )
+
+    maxAbsDiff = [ max(absDiff[i][131:]) for i in range(len(algNames)) ]
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(sqDiff[0][131:]),
+        statistics.stdev(sqDiff[0][131:]),
+        algNames[1],
+        statistics.mean(sqDiff[1][131:]),
+        statistics.stdev(sqDiff[1][131:]),
+        t_MSE.statistic,
+        t_MSE.pvalue,
+        "MSE.ph3"))
+
+    print(outputTemplate.format(
+        algNames[0],
+        statistics.mean(absDiff[0][131:]),
+        statistics.stdev(absDiff[0][131:]),
+        algNames[1],
+        statistics.mean(absDiff[1][131:]),
+        statistics.stdev(absDiff[1][131:]),
+        t_MAD.statistic,
+        t_MAD.pvalue,
+        "MAD.ph3"))
+
+##    print("{0:9} {1:>10} {2:>10} {3:>10} {4:>10} {5:>10} {6:>10} {7:>10} {8:>10} {9:>10} {10:>10} {11:>10} {12:>10}".format( 
+##        "Schedule",
+##        "maxDiff",
+##        "sumDiff",
+##        "Euclidean",
+##        "maxPh1",
+##        "sumPh1",
+##        "EuclPh1",
+##        "maxPh2",
+##        "sumPh2",
+##        "EuclPh2",
+##        "maxPh3",
+##        "sumPh3",
+##        "EuclPh3"
+##        ))
+##    for i in range(len(algNames)) :
+##        euc = scipy.spatial.distance.euclidean(target, rates[i])
+##        maxPointDist = scipy.spatial.distance.chebyshev(target, rates[i])
+##        sumAbsDiff = scipy.spatial.distance.cityblock(target, rates[i])
+##        
+##        euc1 = scipy.spatial.distance.euclidean(target[:17], rates[i][:17])
+##        maxPointDist1 = scipy.spatial.distance.chebyshev(target[:17], rates[i][:17])
+##        sumAbsDiff1 = scipy.spatial.distance.cityblock(target[:17], rates[i][:17])
+##
+##        euc2 = scipy.spatial.distance.euclidean(target[17:67], rates[i][17:67])
+##        maxPointDist2 = scipy.spatial.distance.chebyshev(target[17:67], rates[i][17:67])
+##        sumAbsDiff2 = scipy.spatial.distance.cityblock(target[17:67], rates[i][17:67])
+##
+##        euc3 = scipy.spatial.distance.euclidean(target[67:], rates[i][67:])
+##        maxPointDist3 = scipy.spatial.distance.chebyshev(target[67:], rates[i][67:])
+##        sumAbsDiff3 = scipy.spatial.distance.cityblock(target[67:], rates[i][67:])
+##        
+##        print("{0:9} {1:10.3f} {2:10.3f} {3:10.3f} {4:10.3f} {5:10.3f} {6:10.3f} {7:10.3f} {8:10.3f} {9:10.3f} {10:10.3f} {11:10.3f} {12:10.3f}".format(
+##            algNames[i],
+##            maxPointDist,
+##            sumAbsDiff,
+##            euc,
+##            maxPointDist1,
+##            sumAbsDiff1,
+##            euc1,
+##            maxPointDist2,
+##            sumAbsDiff2,
+##            euc2,
+##            maxPointDist3,
+##            sumAbsDiff3,
+##            euc3
+##            ))
 
     fig, ax = matplotlib.pyplot.subplots()
     ax.xaxis.set_major_formatter(PercentFormatter(xmax=1))
