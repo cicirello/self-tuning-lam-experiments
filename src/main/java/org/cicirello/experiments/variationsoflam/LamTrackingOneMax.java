@@ -45,7 +45,6 @@ public class LamTrackingOneMax {
 		final int BITS = RUN_LENGTH >= 1000000 ? 12800 :
 			(RUN_LENGTH >= 100000 ? 6400
 			: (RUN_LENGTH >= 10000 ? 960 : 192));
-		//final int BITS3 = RUN_LENGTH <= 1000 ? BITS + 128 : (RUN_LENGTH >= 100000 ? BITS + 64 : BITS + 32);
 		final int BIT_LENGTH = BITS; 
 		IntegerCostFunctionScaler<BitVector> problem = new IntegerCostFunctionScaler<BitVector>(new OneMax(), SCALE);
 		final int MAX_BITS_MUTATE = 1;
@@ -85,20 +84,6 @@ public class LamTrackingOneMax {
 			System.out.println(modifiedLam.getAcceptanceRate(i) + "\t" + selfTuningLam.getAcceptanceRate(i));
 		}
 		
-		/*
-		// Remove this later
-		double lam002 = 0.44 + 0.56 * Math.pow(560, -2.0/150);
-		double lam011 = 0.44 + 0.56 * Math.pow(560, -11.0/150);
-		System.out.println("lam002:" + lam002);
-		System.out.println("lam011:" + lam011);
-		*/
-		//System.out.println("001 case: " + 1.0/Math.log(0.001/(1.001-0.9546897506857566)));
-		//System.out.println("01 case: " + 1.0/Math.log(0.001/(1.001-0.7920904441690215)));
-		//double lam02 = 0.44 + 0.56 * Math.pow(560, -2.0/15);
-		//System.out.println("lam02: " + lam02);
-		//System.out.println("02 case: " + 1.0/Math.log(0.001/(1.001-0.6808590431613767)));
-		//System.out.println("beta 10k case: " + 0.260731492877931 / 0.3141120890121576);
-		//System.out.println("beta 1k case: " + 0.17334743675123146 / 0.18987910472222955);
 	}
 	
 }
