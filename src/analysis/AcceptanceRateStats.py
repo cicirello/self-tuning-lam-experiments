@@ -155,54 +155,50 @@ if __name__ == "__main__" :
     runLength, scale = parseFilename(datafile)
     algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
 
-    print("Statistical Analysis of End of Run Costs")
+    print("CostFunc = End of Run Costs.")
+    print("MSE = The MSE between target rate and observed rate")
+    print("MSE.Ph# = The MSE between target rate and observed rate during phase #")
     print("Run Length (in SA iterations):", runLength)
     print("Cost function scale factor:", scale)
     print()
-    print("{8:9} {0:9} {1:>8} {2:>8} {3:8} {4:>8} {5:>8} {6:>8} {7:>20}".format(
-        "Schedule1",
+    print("{4:9} {0:>8} {1:>8} {2:>8} {3:>8}".format(
+        algNames[0],
+        algNames[0],
+        algNames[1],
+        algNames[1],
+        ""
+        ))
+    print("{6:9} {0:>8} {1:>8} {2:>8} {3:>8} {4:>8} {5:>20}".format(
         "Mean",
         "StDev",
-        "Schedule2",
         "Mean",
         "StDev",
         "t-stat",
         "P-value",
         "Measure"
         ))
-    outputTemplate = "{8:9} {0:9} {1:8.2f} {2:8.2f} {3:9} {4:8.2f} {5:8.2f} {6:8.2f} {7:20}"        
-    for i in range(len(algNames)-1) :
-        for j in range(i+1, len(algNames)) :
-            t = scipy.stats.ttest_ind(
-                costs[i],
-                costs[j],
-                equal_var = False)
+    outputTemplate = "{6:9} {0:8.2f} {1:8.2f} {2:8.2f} {3:8.2f} {4:8.2f} {5:20}"        
+    t = scipy.stats.ttest_ind(
+        costs[0],
+        costs[1],
+        equal_var = False)
 
-            print(outputTemplate.format(
-                algNames[i],
-                statistics.mean(costs[i]),
-                statistics.stdev(costs[i]),
-                algNames[j],
-                statistics.mean(costs[j]),
-                statistics.stdev(costs[j]),
-                t.statistic,
-                t.pvalue,
-                "CostFunc"))
+    print(outputTemplate.format(
+        statistics.mean(costs[0]),
+        statistics.stdev(costs[0]),
+        statistics.mean(costs[1]),
+        statistics.stdev(costs[1]),
+        t.statistic,
+        t.pvalue,
+        "CostFunc"))
 
-    print()
     target, xVals = targetAcceptanceRate(runLength)
     target = sampleDataAlongTimeAxis(target, 200)
     xVals = sampleDataAlongTimeAxis(xVals, 200)
     for i in range(len(algNames)) :
         rates[i] = sampleDataAlongTimeAxis(rates[i], 200)
 
-    absDiff = [ [math.fabs(target[j]-x) for j, x in enumerate(rates[i])] for i in range(len(algNames)) ]
-    sqDiff = [ list(map(lambda x : x*x, absDiff[i])) for i in range(len(algNames)) ]
-    t_MAD = scipy.stats.ttest_ind(
-        absDiff[0],
-        absDiff[1],
-        equal_var = False
-        )
+    sqDiff = [ [(target[j]-x)**2 for j, x in enumerate(rates[i])] for i in range(len(algNames)) ]
 
     t_MSE = scipy.stats.ttest_ind(
         sqDiff[0],
@@ -210,37 +206,17 @@ if __name__ == "__main__" :
         equal_var = False
         )
 
-    maxAbsDiff = [ max(absDiff[i]) for i in range(len(algNames)) ]
-
-    outputTemplate = "{8:9} {0:9} {1:8.6f} {2:8.6f} {3:9} {4:8.6f} {5:8.6f} {6:8.2f} {7:20}"        
+    outputTemplate = "{6:9} {0:8.6f} {1:8.6f} {2:8.6f} {3:8.6f} {4:8.2f} {5:20}"        
     print(outputTemplate.format(
-        algNames[0],
         statistics.mean(sqDiff[0]),
         statistics.stdev(sqDiff[0]),
-        algNames[1],
         statistics.mean(sqDiff[1]),
         statistics.stdev(sqDiff[1]),
         t_MSE.statistic,
         t_MSE.pvalue,
         "MSE"))
 
-    print(outputTemplate.format(
-        algNames[0],
-        statistics.mean(absDiff[0]),
-        statistics.stdev(absDiff[0]),
-        algNames[1],
-        statistics.mean(absDiff[1]),
-        statistics.stdev(absDiff[1]),
-        t_MAD.statistic,
-        t_MAD.pvalue,
-        "MAD"))
-
     # PHASE 1: first 15% of run
-    t_MAD = scipy.stats.ttest_ind(
-        absDiff[0][:31],
-        absDiff[1][:31],
-        equal_var = False
-        )
 
     t_MSE = scipy.stats.ttest_ind(
         sqDiff[0][:31],
@@ -248,36 +224,16 @@ if __name__ == "__main__" :
         equal_var = False
         )
 
-    maxAbsDiff = [ max(absDiff[i][:31]) for i in range(len(algNames)) ]
-
     print(outputTemplate.format(
-        algNames[0],
         statistics.mean(sqDiff[0][:31]),
         statistics.stdev(sqDiff[0][:31]),
-        algNames[1],
         statistics.mean(sqDiff[1][:31]),
         statistics.stdev(sqDiff[1][:31]),
         t_MSE.statistic,
         t_MSE.pvalue,
         "MSE.ph1"))
 
-    print(outputTemplate.format(
-        algNames[0],
-        statistics.mean(absDiff[0][:31]),
-        statistics.stdev(absDiff[0][:31]),
-        algNames[1],
-        statistics.mean(absDiff[1][:31]),
-        statistics.stdev(absDiff[1][:31]),
-        t_MAD.statistic,
-        t_MAD.pvalue,
-        "MAD.ph1"))
-
     # PHASE 2: next 50% of run
-    t_MAD = scipy.stats.ttest_ind(
-        absDiff[0][31:131],
-        absDiff[1][31:131],
-        equal_var = False
-        )
 
     t_MSE = scipy.stats.ttest_ind(
         sqDiff[0][31:131],
@@ -285,36 +241,16 @@ if __name__ == "__main__" :
         equal_var = False
         )
 
-    maxAbsDiff = [ max(absDiff[i][31:131]) for i in range(len(algNames)) ]
-
     print(outputTemplate.format(
-        algNames[0],
         statistics.mean(sqDiff[0][31:131]),
         statistics.stdev(sqDiff[0][31:131]),
-        algNames[1],
         statistics.mean(sqDiff[1][31:131]),
         statistics.stdev(sqDiff[1][31:131]),
         t_MSE.statistic,
         t_MSE.pvalue,
         "MSE.ph2"))
 
-    print(outputTemplate.format(
-        algNames[0],
-        statistics.mean(absDiff[0][31:131]),
-        statistics.stdev(absDiff[0][31:131]),
-        algNames[1],
-        statistics.mean(absDiff[1][31:131]),
-        statistics.stdev(absDiff[1][31:131]),
-        t_MAD.statistic,
-        t_MAD.pvalue,
-        "MAD.ph2"))
-
     # PHASE 3: last 35% of run
-    t_MAD = scipy.stats.ttest_ind(
-        absDiff[0][131:],
-        absDiff[1][131:],
-        equal_var = False
-        )
 
     t_MSE = scipy.stats.ttest_ind(
         sqDiff[0][131:],
@@ -322,29 +258,15 @@ if __name__ == "__main__" :
         equal_var = False
         )
 
-    maxAbsDiff = [ max(absDiff[i][131:]) for i in range(len(algNames)) ]
-
     print(outputTemplate.format(
-        algNames[0],
         statistics.mean(sqDiff[0][131:]),
         statistics.stdev(sqDiff[0][131:]),
-        algNames[1],
         statistics.mean(sqDiff[1][131:]),
         statistics.stdev(sqDiff[1][131:]),
         t_MSE.statistic,
         t_MSE.pvalue,
         "MSE.ph3"))
 
-    print(outputTemplate.format(
-        algNames[0],
-        statistics.mean(absDiff[0][131:]),
-        statistics.stdev(absDiff[0][131:]),
-        algNames[1],
-        statistics.mean(absDiff[1][131:]),
-        statistics.stdev(absDiff[1][131:]),
-        t_MAD.statistic,
-        t_MAD.pvalue,
-        "MAD.ph3"))
 
 ##    print("{0:9} {1:>10} {2:>10} {3:>10} {4:>10} {5:>10} {6:>10} {7:>10} {8:>10} {9:>10} {10:>10} {11:>10} {12:>10}".format( 
 ##        "Schedule",
