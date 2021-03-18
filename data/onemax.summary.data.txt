@@ -1,0 +1,128 @@
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.1k.1.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 1
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc     22.94     5.05     8.14     2.42    26.43 8.859232428790199e-57
+MSE       0.034521 0.026650 0.003840 0.004881    16.01 2.2289794906440327e-38
+MSE.ph1   0.021433 0.044414 0.004428 0.005152     2.12  0.04239409811052768
+MSE.ph2   0.033257 0.019059 0.002221 0.003327    16.04 5.2396080495138534e-30
+MSE.ph3   0.042233 0.023205 0.005923 0.005786    12.61 2.3283764015750496e-20
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.10k.1.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 1
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc     10.52     3.92     7.12     2.92     6.96 5.829823272179578e-11
+MSE       0.006355 0.017399 0.001854 0.002803     3.61 0.0003806527740241349
+MSE.ph1   0.020789 0.039204 0.003482 0.003480     2.45 0.020310593649101847
+MSE.ph2   0.002813 0.003656 0.001925 0.002845     1.92  0.05698927471481899
+MSE.ph3   0.005005 0.008553 0.001021 0.001985     3.77 0.0003229154360503791
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.100k.1.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 1
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc      9.53     3.44     9.56     2.61    -0.07   0.9446807686448584
+MSE       0.003323 0.014383 0.001890 0.003474     1.37  0.17195201632557502
+MSE.ph1   0.011616 0.035147 0.003168 0.005586     1.32   0.1957592566382449
+MSE.ph2   0.002420 0.003253 0.002395 0.003392     0.05    0.957608152608953
+MSE.ph3   0.000907 0.002556 0.000583 0.001398     0.92    0.357676392869158
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.1000k.1.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 1
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc      9.41     3.22     6.52     3.01     6.56 4.703183048856469e-10
+MSE       0.002552 0.014489 0.001869 0.003342     0.65   0.5166107283139157
+MSE.ph1   0.008723 0.036103 0.002542 0.004561     0.95  0.35160175989488773
+MSE.ph2   0.002067 0.003309 0.002281 0.002982    -0.48   0.6315215949934689
+MSE.ph3   0.000484 0.001150 0.000971 0.003048    -1.24  0.21751494970922441
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.1k.10.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 10
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc      5.40     6.88    80.20    27.41   -26.47 7.223871335707675e-50
+MSE       0.078685 0.071022 0.004221 0.005234    14.79 5.637979308771198e-34
+MSE.ph1   0.043556 0.059878 0.003173 0.005162     3.74 0.0007609748597879553
+MSE.ph2   0.134777 0.043134 0.002893 0.003622    30.47 1.5619208283340082e-52
+MSE.ph3   0.013175 0.030445 0.006616 0.006358     1.75  0.08393901226240943
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.10k.10.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 10
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc    108.90    35.07    67.60    26.86     9.35 2.8860135215054036e-17
+MSE       0.025420 0.039937 0.002268 0.004368     8.15 3.644348691682082e-14
+MSE.ph1   0.080095 0.049887 0.004435 0.007309     8.36 1.8080889973613983e-09
+MSE.ph2   0.021157 0.034635 0.002467 0.004203     5.36 5.26844372665794e-07
+MSE.ph3   0.007033 0.009522 0.001005 0.001650     5.18 1.925763963378249e-06
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.100k.10.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 10
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc     92.30    37.03    84.30    25.79     1.77  0.07799867987698887
+MSE       0.005619 0.027967 0.002131 0.003616     1.75  0.08169424861666055
+MSE.ph1   0.028565 0.067191 0.004527 0.006089     1.98 0.056345280620596176
+MSE.ph2   0.002063 0.002713 0.002367 0.003201    -0.72  0.46977343173630237
+MSE.ph3   0.000464 0.000956 0.000712 0.001498    -1.16  0.24971836263989558
+
+
+"python" src/analysis/AcceptanceRateStats.py "data/"onemax.1000k.10.txt
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 10
+
+              MLam     MLam    STLam    STLam
+Measure       Mean    StDev     Mean    StDev   t-stat              P-value
+CostFunc     96.00    32.84    71.00    30.99     5.54 9.783827085083862e-08
+MSE       0.002649 0.012617 0.002729 0.005117    -0.08   0.9337151773656409
+MSE.ph1   0.007983 0.031397 0.004618 0.009869     0.57   0.5727381130462696
+MSE.ph2   0.002379 0.002853 0.003022 0.003491    -1.43  0.15540614747286996
+MSE.ph3   0.000643 0.001395 0.001455 0.003537    -1.77  0.07947097412877961
+
+
