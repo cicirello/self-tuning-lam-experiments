@@ -131,7 +131,8 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 		sameCostCount = 0;
 		betterCostCount = 0;
 		deltaSum = 0.0;
-		// very very short runs won't have a phase 0, so default to initial t=0.5
+		// very very short runs won't have a phase 0, so 
+		// default to initial t=0.5 (the initial t of original modified lam).
 		t = 0.5;
 		iterationCount = 0;
 		if (lastMaxEvals != maxEvals) {
@@ -150,6 +151,18 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 				// Set alpha for a 0.01N-"day" exponential moving average,
 				// but no greater than 0.2.
 				alpha = phase0 > 9 ? 2.0 / (1.0 + phase0) : 0.2;
+				
+				// The temperature decay rate, beta, is set at the end of phase0,
+				// but very short runs (less than 100 maxEvals) won't have
+				// a phase0, so need to initialize it to something.
+				// Given the default initial t of 0.5 for such short runs,
+				// 100 temp decay steps would need a beta of 0.94 to drop to
+				// approximately t=0.001, and approximately 50 temp decay steps
+				// would need a beta of around 0.88 to reach a temp of t=0.001.
+				// So we chose a beta somewhere in between as the default.
+				// Note that runs of at least 100 maxEvals will end up changing
+				// this at end of phase0.
+				beta = 0.9;
 			}
 			phase1 = 0.15 * maxEvals;
 			phase2 = 0.65 * maxEvals;
@@ -237,30 +250,6 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 				1.0 / phase0
 			);
 		}
-		
-		// NEED TO CHECK IF T IS INFINITE AND SET IT FINITE
-		//if (t > 1e6) t = 1e6;
-		/*
-		double dropRate = lastMaxEvals >= 10000 ? LAM_RATE_002 : LAM_RATE_02;
-		if (initialAcceptanceRate < dropRate) {
-			beta = -costAverage / 
-				(t * Math.log((dropRate - initialAcceptanceRate) / 
-				(1.0 - initialAcceptanceRate)));
-			System.out.println("beta: " + beta + " t: " + t);
-		} else {
-			beta = costAverage * (lastMaxEvals >= 10000 ? 0.260731492877931 : 0.17334743675123146) / t;
-		}
-		//if (beta < 0.7) beta = 0.7; // ?????
-		beta = 0.999;
-		*/
-		/*
-		if (lastMaxEvals >= 10000) {
-			beta = Math.pow(0.001/t, 3.003003003003003 / lastMaxEvals);
-		} else {
-			beta = Math.pow(0.001/t, 3.0303030303030303 / lastMaxEvals);
-		}
-		if (beta > 0.9999) beta = 0.9999;
-		*/
 	}
 	
 	private void updateSchedule(boolean doAccept) {
