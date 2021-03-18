@@ -34,7 +34,11 @@ public class LamTrackingOneMax {
 	
 	/**
 	 * Runs the experiment.
-	 * @param args There are no command line arguments.
+	 * @param args There are two optional command line arguments. args[0] is
+	 * the length of the simulated annealing runs in maximum number of evaluations
+	 * which has a default of 1000 if not specified on the command line. args[1]
+	 * is a scale factor, which scales the cost function values by whatever 
+	 * value is specified here, which must be a positive integer.
 	 */
 	public static void main(String[] args) {
 		final int RUN_LENGTH = args.length > 0 ? Integer.parseInt(args[0]) : 1000;
