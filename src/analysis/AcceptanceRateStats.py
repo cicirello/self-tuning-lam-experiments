@@ -107,7 +107,7 @@ def dataFilenameToFigureFilename(datafile) :
     Keyword arguments:
     datafile - The data file including path
     """
-    figureFilename = datafile + ".svg" if datafile[-4:] != ".txt" else datafile[:-3] + ".svg"
+    figureFilename = datafile + ".svg" if datafile[-4:] != ".txt" else datafile[:-4] + ".svg"
     return figureFilename
 
 def sampleDataAlongTimeAxis(data, numPoints=100) :
