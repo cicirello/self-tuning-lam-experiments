@@ -100,14 +100,14 @@ def targetAcceptanceRate(runLength) :
         track.append(targetRate)
     return track, [i/runLength for i in range(1,runLength+1)]
 
-def dataFilenameToFigureFilename(datafile) :
+def dataFilenameToFigureFilename(datafile, extension="svg") :
     """Generates the name for the output file containing the
     graph of the data.
 
     Keyword arguments:
     datafile - The data file including path
     """
-    figureFilename = datafile + ".svg" if datafile[-4:] != ".txt" else datafile[:-4] + ".svg"
+    figureFilename = datafile + "." + extension if datafile[-4:] != ".txt" else datafile[:-3] + extension
     return figureFilename
 
 def sampleDataAlongTimeAxis(data, numPoints=100) :
@@ -123,7 +123,7 @@ def sampleDataAlongTimeAxis(data, numPoints=100) :
     numPoints - the number of points along time axis to sample, equally distant
     """
     sampled = [data[0]]
-    for i in range(len(data)//numPoints, len(data), len(data)//numPoints) :
+    for i in range(len(data)//numPoints-1, len(data), len(data)//numPoints) :
         sampled.append(data[i])
     return sampled
 
@@ -146,11 +146,24 @@ def medianSmoothing(data, k) :
         data[i] = None
         data[-i-1] = None
 
+def pValueToTextString(p) :
+    if p < 0.0001 :
+        e = int(math.log10(p))
+        return r"$p \leq 10^{" + str(e) + r"}$"
+    elif p < 0.001 :
+        return "$p={0:.4f}$".format(p)
+    elif p < 0.01 :
+        return "$p={0:.4f}$".format(p)
+    elif p < 0.1 :
+        return "$p={0:.3f}$".format(p)
+    else :
+        return "$p={0:.2f}$".format(p)
+
 if __name__ == "__main__" :
     datafile = sys.argv[1]
     numRuns = int(sys.argv[2]) if len(sys.argv) > 2 else 100
 
-    figureFilename = dataFilenameToFigureFilename(datafile)
+    figureFilename = dataFilenameToFigureFilename(datafile, "svg")
 
     runLength, scale = parseFilename(datafile)
     algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
@@ -161,23 +174,22 @@ if __name__ == "__main__" :
     print("Run Length (in SA iterations):", runLength)
     print("Cost function scale factor:", scale)
     print()
-    print("{4:9} {0:>8} {1:>8} {2:>8} {3:>8}".format(
+    print("{2:9} {0:>8} {0:>8} {0:>6} {1:>8} {1:>8} {1:>6}".format(
         algNames[0],
-        algNames[0],
-        algNames[1],
         algNames[1],
         ""
         ))
-    print("{6:9} {0:>8} {1:>8} {2:>8} {3:>8} {4:>8} {5:>20}".format(
-        "Mean",
-        "StDev",
+    print("{4:9} {6:>8} {0:>8} {5:>6} {6:>8} {0:>8} {5:>6} {2:>8} {3:>22} {7:>22}".format(
         "Mean",
         "StDev",
         "t-stat",
-        "P-value",
-        "Measure"
+        "T-Test P-value",
+        "Measure",
+        "Pnorm",
+        "Median",
+        "Wilcoxon ranksum P-val"
         ))
-    outputTemplate = "{6:9} {0:8.2f} {1:8.2f} {2:8.2f} {3:8.2f} {4:8.2f} {5:20}"        
+    outputTemplate = "{6:9} {9:8.2f} {0:8.2f} {7:5.4f} {10:8.2f} {2:8.2f} {8:5.4f} {4:8.2f} {5:22} {11:22}"        
     t = scipy.stats.ttest_ind(
         costs[0],
         costs[1],
@@ -190,7 +202,12 @@ if __name__ == "__main__" :
         statistics.stdev(costs[1]),
         t.statistic,
         t.pvalue,
-        "CostFunc"))
+        "CostFunc",
+        scipy.stats.normaltest(costs[0]).pvalue,
+        scipy.stats.normaltest(costs[1]).pvalue,
+        statistics.median(costs[0]),
+        statistics.median(costs[1]),
+        scipy.stats.ranksums(costs[0], costs[1]).pvalue))
 
     target, xVals = targetAcceptanceRate(runLength)
     target = sampleDataAlongTimeAxis(target, 200)
@@ -206,15 +223,24 @@ if __name__ == "__main__" :
         equal_var = False
         )
 
-    outputTemplate = "{6:9} {0:8.6f} {1:8.6f} {2:8.6f} {3:8.6f} {4:8.2f} {5:20}"        
+    # Using these in graphs at end, so don't reset within phases....
+    MSE = [ statistics.mean(sqDiff[0]), statistics.mean(sqDiff[1]) ]
+    p_text = pValueToTextString(t_MSE.pvalue)
+    #print(p_text)
+
+    outputTemplate = "{6:9} {9:8.6f} {0:8.6f} {7:5.4f} {10:8.6f} {2:8.6f} {8:5.4f} {4:8.2f} {5:22}"        
     print(outputTemplate.format(
-        statistics.mean(sqDiff[0]),
+        MSE[0],
         statistics.stdev(sqDiff[0]),
-        statistics.mean(sqDiff[1]),
+        MSE[1],
         statistics.stdev(sqDiff[1]),
         t_MSE.statistic,
         t_MSE.pvalue,
-        "MSE"))
+        "MSE",
+        scipy.stats.normaltest(sqDiff[0]).pvalue,
+        scipy.stats.normaltest(sqDiff[1]).pvalue,
+        statistics.median(sqDiff[0]),
+        statistics.median(sqDiff[1])))
 
     # PHASE 1: first 15% of run
 
@@ -231,7 +257,11 @@ if __name__ == "__main__" :
         statistics.stdev(sqDiff[1][:31]),
         t_MSE.statistic,
         t_MSE.pvalue,
-        "MSE.ph1"))
+        "MSE.ph1",
+        scipy.stats.normaltest(sqDiff[0][:31]).pvalue,
+        scipy.stats.normaltest(sqDiff[1][:31]).pvalue,
+        statistics.median(sqDiff[0][:31]),
+        statistics.median(sqDiff[1][:31])))
 
     # PHASE 2: next 50% of run
 
@@ -248,7 +278,11 @@ if __name__ == "__main__" :
         statistics.stdev(sqDiff[1][31:131]),
         t_MSE.statistic,
         t_MSE.pvalue,
-        "MSE.ph2"))
+        "MSE.ph2",
+        scipy.stats.normaltest(sqDiff[0][31:131]).pvalue,
+        scipy.stats.normaltest(sqDiff[1][31:131]).pvalue,
+        statistics.median(sqDiff[0][31:131]),
+        statistics.median(sqDiff[1][31:131])))
 
     # PHASE 3: last 35% of run
 
@@ -265,7 +299,11 @@ if __name__ == "__main__" :
         statistics.stdev(sqDiff[1][131:]),
         t_MSE.statistic,
         t_MSE.pvalue,
-        "MSE.ph3"))
+        "MSE.ph3",
+        scipy.stats.normaltest(sqDiff[0][131:]).pvalue,
+        scipy.stats.normaltest(sqDiff[1][131:]).pvalue,
+        statistics.median(sqDiff[0][131:]),
+        statistics.median(sqDiff[1][131:])))
 
 
 ##    print("{0:9} {1:>10} {2:>10} {3:>10} {4:>10} {5:>10} {6:>10} {7:>10} {8:>10} {9:>10} {10:>10} {11:>10} {12:>10}".format( 
@@ -316,11 +354,20 @@ if __name__ == "__main__" :
 ##            euc3
 ##            ))
 
-    fig, ax = matplotlib.pyplot.subplots()
+    w = 3.49
+    h = w * 0.75
+    matplotlib.pyplot.rc('font', size=9)
+    matplotlib.pyplot.rc('text', usetex=True)
+    #fig, ax = matplotlib.pyplot.subplots(figsize=(w,h))
+    fig, ax = matplotlib.pyplot.subplots(figsize=(w,h), constrained_layout=True)
+    #fig, ax = matplotlib.pyplot.subplots(figsize=(w,h), tight_layout=True)
+    #fig.set_size_inches([w, h])
+    #fig.tight_layout(pad=0, h_pad=0, w_pad=0)
+    #fig.tight_layout()
     ax.xaxis.set_major_formatter(PercentFormatter(xmax=1))
-    line, = ax.plot(xVals, target, '-k', label='The target acceptance rate')
     matplotlib.pyplot.xlabel('percent of run')
     matplotlib.pyplot.ylabel('acceptance rate')
+    line, = ax.plot(xVals[0:201:2], target[0:201:2], '-k', label='Target acceptance rate')
     styles = [ ':b', '--r' ]
     for i in range(len(algNames)) :
         if algNames[i] == "MLam" :
@@ -329,8 +376,13 @@ if __name__ == "__main__" :
             algLabel = "Self-Tuning Lam"
         else :
             algLabel = "Unknown"
-        line, = ax.plot(xVals, rates[i], styles[i], label="{0} observed acceptance rate".format(algLabel))
+        strMSE = "{0:0.4f}".format(MSE[i])
+        line, = ax.plot(xVals[0:201:2],
+                        rates[i][0:201:2],
+                        styles[i],
+                        label = algLabel + r" ($\mathrm{MSE}=" + strMSE + "$)")
     ax.legend()
+    ax.text(0.7, 0.6, p_text)
     matplotlib.pyplot.savefig(figureFilename)
 
 ## Previously tried smoothing the data, but this
