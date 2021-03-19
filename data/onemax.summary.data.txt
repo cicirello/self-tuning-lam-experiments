@@ -5,13 +5,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 1000
 Cost function scale factor: 1
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc     22.94     5.05     8.14     2.42    26.43 8.859232428790199e-57
-MSE       0.034521 0.026650 0.003840 0.004881    16.01 2.2289794906440327e-38
-MSE.ph1   0.021433 0.044414 0.004428 0.005152     2.12  0.04239409811052768
-MSE.ph2   0.033257 0.019059 0.002221 0.003327    16.04 5.2396080495138534e-30
-MSE.ph3   0.042233 0.023205 0.005923 0.005786    12.61 2.3283764015750496e-20
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc     22.00    22.94 0.0011     8.00     8.14 0.2334    26.43  8.859232428790199e-57   3.11432576902986e-34
+MSE       0.032384 0.033279 0.0000 0.001700 0.004353 0.0000    16.50 1.3344909288536117e-40
+MSE.ph1   0.003621 0.016619 0.0000 0.001586 0.004520 0.0000     1.80     0.0814164215838464
+MSE.ph2   0.032400 0.032817 0.0193 0.000900 0.002887 0.0000    17.42  7.301935766567127e-34
+MSE.ph3   0.042369 0.041317 0.7134 0.004394 0.006374 0.0000    12.37 3.3772105805001985e-20
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.10k.1.txt
@@ -21,13 +21,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 10000
 Cost function scale factor: 1
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc     10.52     3.92     7.12     2.92     6.96 5.829823272179578e-11
-MSE       0.006355 0.017399 0.001854 0.002803     3.61 0.0003806527740241349
-MSE.ph1   0.020789 0.039204 0.003482 0.003480     2.45 0.020310593649101847
-MSE.ph2   0.002813 0.003656 0.001925 0.002845     1.92  0.05698927471481899
-MSE.ph3   0.005005 0.008553 0.001021 0.001985     3.77 0.0003229154360503791
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc     10.00    10.52 0.0020     7.00     7.12 0.0621     6.96  5.829823272179578e-11 2.4386074074258915e-10
+MSE       0.001600 0.005781 0.0000 0.000762 0.002158 0.0000     3.01  0.0029348691745477895
+MSE.ph1   0.004293 0.019547 0.0000 0.000951 0.002422 0.0000     2.45    0.02043718654477848
+MSE.ph2   0.001600 0.002884 0.0000 0.001600 0.002997 0.0000    -0.20     0.8440690866456613
+MSE.ph3   0.001089 0.003824 0.0000 0.000286 0.000841 0.0000     4.34  4.065043925592107e-05
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.100k.1.txt
@@ -37,13 +37,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 100000
 Cost function scale factor: 1
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc      9.53     3.44     9.56     2.61    -0.07   0.9446807686448584
-MSE       0.003323 0.014383 0.001890 0.003474     1.37  0.17195201632557502
-MSE.ph1   0.011616 0.035147 0.003168 0.005586     1.32   0.1957592566382449
-MSE.ph2   0.002420 0.003253 0.002395 0.003392     0.05    0.957608152608953
-MSE.ph3   0.000907 0.002556 0.000583 0.001398     0.92    0.357676392869158
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc      9.00     9.53 0.0764     9.00     9.56 0.0531    -0.07     0.9446807686448584     0.7387398454996014
+MSE       0.000400 0.003165 0.0000 0.000400 0.001736 0.0000     1.38    0.16844759813849255
+MSE.ph1   0.001927 0.012118 0.0000 0.000594 0.002423 0.0000     1.54     0.1331758766167716
+MSE.ph2   0.000900 0.002137 0.0000 0.000900 0.002354 0.0000    -0.42     0.6728241856545358
+MSE.ph3   0.000060 0.000668 0.0000 0.000088 0.000549 0.0000     0.42     0.6775313348608396
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.1000k.1.txt
@@ -53,13 +53,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 1000000
 Cost function scale factor: 1
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc      9.41     3.22     6.52     3.01     6.56 4.703183048856469e-10
-MSE       0.002552 0.014489 0.001869 0.003342     0.65   0.5166107283139157
-MSE.ph1   0.008723 0.036103 0.002542 0.004561     0.95  0.35160175989488773
-MSE.ph2   0.002067 0.003309 0.002281 0.002982    -0.48   0.6315215949934689
-MSE.ph3   0.000484 0.001150 0.000971 0.003048    -1.24  0.21751494970922441
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc      9.00     9.41 0.7707     7.00     6.52 0.2042     6.56  4.703183048856469e-10  3.838409138154873e-09
+MSE       0.000400 0.002808 0.0000 0.000400 0.002260 0.0000     0.50     0.6183850137666842
+MSE.ph1   0.001325 0.009366 0.0000 0.001771 0.005592 0.0000     0.55     0.5836464942362429
+MSE.ph2   0.000900 0.002494 0.0000 0.000900 0.002176 0.0000     0.63     0.5301988987203587
+MSE.ph3   0.000069 0.000353 0.0000 0.000102 0.000905 0.0000    -1.78    0.07943833033309494
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.1k.10.txt
@@ -69,13 +69,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 1000
 Cost function scale factor: 10
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc      5.40     6.88    80.20    27.41   -26.47 7.223871335707675e-50
-MSE       0.078685 0.071022 0.004221 0.005234    14.79 5.637979308771198e-34
-MSE.ph1   0.043556 0.059878 0.003173 0.005162     3.74 0.0007609748597879553
-MSE.ph2   0.134777 0.043134 0.002893 0.003622    30.47 1.5619208283340082e-52
-MSE.ph3   0.013175 0.030445 0.006616 0.006358     1.75  0.08393901226240943
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc      0.00     5.40 0.0021    80.00    80.20 0.0291   -26.47  7.223871335707675e-50    5.6686953742353e-34
+MSE       0.067600 0.078685 0.0000 0.001600 0.003528 0.0000    15.15 4.0628707695346156e-35
+MSE.ph1   0.028636 0.048841 0.0000 0.001254 0.004249 0.0000     3.91  0.0004758398953746207
+MSE.ph2   0.144400 0.133854 0.0080 0.000900 0.001958 0.0000    31.91 3.7103532944374466e-54
+MSE.ph3   0.000243 0.013089 0.0000 0.004540 0.005452 0.0000     2.07    0.04197925581601636
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.10k.10.txt
@@ -85,13 +85,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 10000
 Cost function scale factor: 10
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc    108.90    35.07    67.60    26.86     9.35 2.8860135215054036e-17
-MSE       0.025420 0.039937 0.002268 0.004368     8.15 3.644348691682082e-14
-MSE.ph1   0.080095 0.049887 0.004435 0.007309     8.36 1.8080889973613983e-09
-MSE.ph2   0.021157 0.034635 0.002467 0.004203     5.36 5.26844372665794e-07
-MSE.ph3   0.007033 0.009522 0.001005 0.001650     5.18 1.925763963378249e-06
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc    110.00   108.90 0.2846    70.00    67.60 0.1081     9.35 2.8860135215054036e-17 1.0433771023408206e-15
+MSE       0.004900 0.025334 0.0000 0.000900 0.002590 0.0000     8.54  2.977159408003581e-15
+MSE.ph1   0.077419 0.082779 0.0003 0.001989 0.004564 0.0000    11.99 1.9648933525349408e-13
+MSE.ph2   0.005650 0.021883 0.0000 0.001600 0.003072 0.0000     5.68 1.2966470697749482e-07
+MSE.ph3   0.001894 0.004823 0.0000 0.000379 0.001028 0.0000     4.52 2.1517695670163613e-05
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.100k.10.txt
@@ -101,13 +101,13 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 100000
 Cost function scale factor: 10
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc     92.30    37.03    84.30    25.79     1.77  0.07799867987698887
-MSE       0.005619 0.027967 0.002131 0.003616     1.75  0.08169424861666055
-MSE.ph1   0.028565 0.067191 0.004527 0.006089     1.98 0.056345280620596176
-MSE.ph2   0.002063 0.002713 0.002367 0.003201    -0.72  0.46977343173630237
-MSE.ph3   0.000464 0.000956 0.000712 0.001498    -1.16  0.24971836263989558
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc     90.00    92.30 0.2066    80.00    84.30 0.9344     1.77    0.07799867987698887    0.18743392626597755
+MSE       0.000400 0.005483 0.0000 0.000460 0.002462 0.0000     1.57    0.11835967834729104
+MSE.ph1   0.001744 0.027429 0.0000 0.001401 0.006198 0.0000     1.81    0.07953353156020372
+MSE.ph2   0.000900 0.001959 0.0000 0.001600 0.002521 0.0000    -1.26    0.20739900619032403
+MSE.ph3   0.000070 0.000797 0.0000 0.000047 0.000723 0.0000     0.18     0.8569948255676773
 
 
 "python" src/analysis/AcceptanceRateStats.py "data/"onemax.1000k.10.txt
@@ -117,12 +117,12 @@ MSE.Ph# = The MSE between target rate and observed rate during phase #
 Run Length (in SA iterations): 1000000
 Cost function scale factor: 10
 
-              MLam     MLam    STLam    STLam
-Measure       Mean    StDev     Mean    StDev   t-stat              P-value
-CostFunc     96.00    32.84    71.00    30.99     5.54 9.783827085083862e-08
-MSE       0.002649 0.012617 0.002729 0.005117    -0.08   0.9337151773656409
-MSE.ph1   0.007983 0.031397 0.004618 0.009869     0.57   0.5727381130462696
-MSE.ph2   0.002379 0.002853 0.003022 0.003491    -1.43  0.15540614747286996
-MSE.ph3   0.000643 0.001395 0.001455 0.003537    -1.77  0.07947097412877961
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc     95.00    96.00 0.1416    70.00    71.00 0.0384     5.54  9.783827085083862e-08 1.1216823744665333e-07
+MSE       0.000400 0.002873 0.0000 0.000400 0.002282 0.0000     0.62     0.5368915539459737
+MSE.ph1   0.001150 0.008644 0.0000 0.000736 0.004959 0.0000     0.63     0.5323586695136916
+MSE.ph2   0.000900 0.002732 0.0000 0.000900 0.002766 0.0000    -0.06     0.9503905709722908
+MSE.ph3   0.000064 0.000519 0.0000 0.000032 0.000405 0.0000     0.62     0.5334168908562077
 
 
