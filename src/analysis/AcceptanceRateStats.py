@@ -166,7 +166,8 @@ if __name__ == "__main__" :
     figureFilename = dataFilenameToFigureFilename(datafile, "svg")
 
     runLength, scale = parseFilename(datafile)
-    algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
+    #algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
+    algNames, costs, rates = extractRawData(datafile, 201, numRuns)
 
     print("CostFunc = End of Run Costs.")
     print("MSE = The MSE between target rate and observed rate")
@@ -212,8 +213,8 @@ if __name__ == "__main__" :
     target, xVals = targetAcceptanceRate(runLength)
     target = sampleDataAlongTimeAxis(target, 200)
     xVals = sampleDataAlongTimeAxis(xVals, 200)
-    for i in range(len(algNames)) :
-        rates[i] = sampleDataAlongTimeAxis(rates[i], 200)
+    #for i in range(len(algNames)) :
+    #    rates[i] = sampleDataAlongTimeAxis(rates[i], 200)
 
     sqDiff = [ [(target[j]-x)**2 for j, x in enumerate(rates[i])] for i in range(len(algNames)) ]
 
