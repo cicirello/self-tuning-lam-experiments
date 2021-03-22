@@ -84,7 +84,9 @@ public class LamTrackingOneMax {
 			}
 		}
 		System.out.println("Acceptance Rate");
-		for (int i = 0; i < RUN_LENGTH; i++) {
+		System.out.println(modifiedLam.getAcceptanceRate(0) + "\t" + selfTuningLam.getAcceptanceRate(0));
+		final int SKIP = RUN_LENGTH / 200;
+		for (int i = SKIP - 1; i < RUN_LENGTH; i+=SKIP) {
 			System.out.println(modifiedLam.getAcceptanceRate(i) + "\t" + selfTuningLam.getAcceptanceRate(i));
 		}
 		
