@@ -11,6 +11,23 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 	
+.PHONY: twomax
+twomax:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax > twomax.1k.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 10000 > twomax.10k.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 100000 > twomax.100k.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000000 > twomax.1000k.txt
+
+.PHONY: analysisTwomax
+analysisTwomax:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax.1000k.1.txt
+
 .PHONY: onemax
 onemax: onemax.1k.1.txt onemax.10k.1.txt onemax.100k.1.txt onemax.1000k.1.txt onemax.1k.10.txt onemax.10k.10.txt onemax.100k.10.txt onemax.1000k.10.txt 
 	
