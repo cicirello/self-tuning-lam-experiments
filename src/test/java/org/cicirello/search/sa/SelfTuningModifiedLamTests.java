@@ -242,6 +242,14 @@ public class SelfTuningModifiedLamTests {
 		expected = -5.5 / Math.log(2*LAM_RATE_ONE_PERCENT_OF_RUN-1);
 		assertEquals(expected, m.getTemperature(), EPSILON);
 		
+		m.init(1000);
+		for (int i = 0; i < 10; i++) {
+			if (i<3) m.accept(10+i, 9);
+			else m.accept(10+i, 20);
+		}
+		expected = -3.4 / Math.log((LAM_RATE_ONE_PERCENT_OF_RUN-0.7)/0.3);
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		
 		// Tests with 10000 evals for 0.001 percent of run case
 		m.init(10000);
 		for (int i = 0; i < 10; i++) {
@@ -269,6 +277,14 @@ public class SelfTuningModifiedLamTests {
 			m.accept(10+i, 110);
 		}
 		expected = 50.5 * 0.3141120890121576;
+		assertEquals(expected, m.getTemperature(), EPSILON);
+		
+		m.init(100000);
+		for (int i = 0; i < 100; i++) {
+			if (i<4) m.accept(10+i, 9);
+			else m.accept(1+i, 105);
+		}
+		expected = -50.5 / Math.log((LAM_RATE_POINT_ONE_PERCENT_OF_RUN-0.96)/0.04);
 		assertEquals(expected, m.getTemperature(), EPSILON);
 		
 		// Tests with 1000000 evals for 0.001 percent of run case
