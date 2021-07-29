@@ -10,13 +10,30 @@ pathToDataFiles = "data/"
 .PHONY: build
 build:
 	mvn clean package
-	
+
+.PHONY: trap
+trap:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap > trap.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 10000 > trap.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 100000 > trap.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 1000000 > trap.1000k.1.txt
+
+.PHONY: analysisTrap
+analysisTrap:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap.1000k.1.txt
+
 .PHONY: twomax
 twomax:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax > twomax.1k.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 10000 > twomax.10k.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 100000 > twomax.100k.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000000 > twomax.1000k.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax > twomax.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 10000 > twomax.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 100000 > twomax.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000000 > twomax.1000k.1.txt
 
 .PHONY: analysisTwomax
 analysisTwomax:
