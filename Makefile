@@ -11,6 +11,23 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 
+.PHONY: porcupine
+porcupine:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine > porcupine.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 10000 > porcupine.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 100000 > porcupine.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 1000000 > porcupine.1000k.1.txt
+
+.PHONY: analysisPorcupine
+analysisPorcupine:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine.1000k.1.txt
+	
 .PHONY: plateaus
 plateaus:
 	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus > plateaus.1k.1.txt
