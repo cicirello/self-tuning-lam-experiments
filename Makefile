@@ -11,11 +11,11 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 	
-.PHONY: experiments
-experiments: onemax.1k.1.txt onemax.10k.1.txt onemax.100k.1.txt onemax.1000k.1.txt onemax.1k.10.txt onemax.10k.10.txt onemax.100k.10.txt onemax.1000k.10.txt 
+.PHONY: onemax
+onemax: onemax.1k.1.txt onemax.10k.1.txt onemax.100k.1.txt onemax.1000k.1.txt onemax.1k.10.txt onemax.10k.10.txt onemax.100k.10.txt onemax.1000k.10.txt 
 	
-.PHONY: analysis
-analysis:
+.PHONY: analysisOnemax
+analysisOnemax:
 	$(py) -m pip install --user scipy
 	$(py) -m pip install --user matplotlib
 	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax.1k.1.txt
