@@ -11,6 +11,24 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 
+.PHONY: mix
+mix:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix > mix.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 10000 > mix.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 100000 > mix.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000000 > mix.1000k.1.txt
+
+.PHONY: analysisMix
+analysisMix:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix.1000k.1.txt
+
+
 .PHONY: porcupine
 porcupine:
 	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine > porcupine.1k.1.txt
