@@ -11,6 +11,23 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 
+.PHONY: plateaus
+plateaus:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus > plateaus.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 10000 > plateaus.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 100000 > plateaus.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 1000000 > plateaus.1000k.1.txt
+
+.PHONY: analysisPlateaus
+analysisPlateaus:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus.1k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus.10k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus.100k.1.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus.1000k.1.txt
+
 .PHONY: trap
 trap:
 	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap > trap.1k.1.txt
