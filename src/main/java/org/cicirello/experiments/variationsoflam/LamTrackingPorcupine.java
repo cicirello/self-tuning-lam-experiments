@@ -42,7 +42,7 @@ public class LamTrackingPorcupine {
 	public static void main(String[] args) {
 		final int RUN_LENGTH = args.length > 0 ? Integer.parseInt(args[0]) : 1000;
 		
-		final boolean FIXED_BITLENGTH = args.length > 2 && args[2].equalsIgnoreCase("fixed");
+		final boolean FIXED_BITLENGTH = args.length > 1 && args[1].equalsIgnoreCase("fixed");
 		
 		final int NUM_SAMPLES = 100;
 		
