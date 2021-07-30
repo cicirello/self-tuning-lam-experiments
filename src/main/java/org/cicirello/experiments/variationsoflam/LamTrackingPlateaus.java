@@ -78,17 +78,17 @@ public class LamTrackingPlateaus {
 			SolutionCostPair<BitVector> solution2 = sa2.optimize(RUN_LENGTH);
 			
 			// Output best of run costs.
-			System.out.print(
-				sa1.getProgressTracker().containsIntCost() ? 
-				sa1.getProgressTracker().getCost() :
-				sa1.getProgressTracker().getCostDouble()
-			);
+			if (sa1.getProgressTracker().containsIntCost()) {
+				System.out.print(sa1.getProgressTracker().getCost());
+			} else {
+				System.out.print(sa1.getProgressTracker().getCostDouble());
+			}
 			System.out.print("\t");
-			System.out.println(
-				sa2.getProgressTracker().containsIntCost() ? 
-				sa2.getProgressTracker().getCost() :
-				sa2.getProgressTracker().getCostDouble()
-			);
+			if (sa2.getProgressTracker().containsIntCost()) {
+				System.out.println(sa2.getProgressTracker().getCost());
+			} else {
+				System.out.println(sa2.getProgressTracker().getCostDouble());
+			}
 			System.out.flush();
 			
 			// Reset the progress trackers for next run to avoid
