@@ -12,12 +12,13 @@ build:
 	mvn clean package
 	
 # Run all with fixed length (256-bit) strings regardless of run length
+# Note that HollandRoyalRoad is actually with 240-bit strings.
 
 .PHONY: experiments256
-experiments256: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256 royal256
+experiments256: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256 royal256 holland240
 
 .PHONY: analysis256
-analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256 analysisRoyal256
+analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256 analysisRoyal256 analysisHolland240
 
 # Run all with variable length bit strings (varies based on run length)
 
@@ -28,6 +29,24 @@ experimentsVar: onemax twomax trap porcupine plateaus mix
 analysisVar: analysisOnemax analysisTwomax analysisTrap analysisPorcupine analysisPlateaus analysisMix
 
 # Targets for experiments with fixed length (256-bit) bit vectors regardless of run length.
+# Note that HollandRoyalRoad is actually with 240-bit strings.
+
+.PHONY: holland240
+holland240:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 1000 > holland240.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 10000 > holland240.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 100000 > holland240.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 1000000 > holland240.1000k.1.txt
+
+.PHONY: analysisHolland240
+analysisHolland240:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}holland240.1k.1.txt > holland240.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}holland240.10k.1.txt >> holland240.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}holland240.100k.1.txt >> holland240.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}holland240.1000k.1.txt >> holland240.summary.data.txt
 
 .PHONY: royal256
 royal256:
