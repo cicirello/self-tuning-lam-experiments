@@ -14,18 +14,18 @@ build:
 # Run all with fixed length (256-bit) strings regardless of run length
 
 .PHONY: experiments256
-experiments: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256
+experiments256: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256
 
 .PHONY: analysis256
-analysis: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256
+analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256
 
 # Run all with variable length bit strings (varies based on run length)
 
 .PHONY: experimentsVar
-experiments: onemax twomax trap porcupine plateaus mix
+experimentsVar: onemax twomax trap porcupine plateaus mix
 
 .PHONY: analysisVar
-analysis: analysisOnemax analysisTwomax analysisTrap analysisPorcupine analysisPlateaus analysisMix
+analysisVar: analysisOnemax analysisTwomax analysisTrap analysisPorcupine analysisPlateaus analysisMix
 
 # Targets for experiments with fixed length (256-bit) bit vectors regardless of run length.
  
