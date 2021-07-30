@@ -14,10 +14,10 @@ build:
 # Run all with fixed length (256-bit) strings regardless of run length
 
 .PHONY: experiments256
-experiments256: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256
+experiments256: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256 royal256
 
 .PHONY: analysis256
-analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256
+analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256 analysisRoyal256
 
 # Run all with variable length bit strings (varies based on run length)
 
@@ -28,7 +28,32 @@ experimentsVar: onemax twomax trap porcupine plateaus mix
 analysisVar: analysisOnemax analysisTwomax analysisTrap analysisPorcupine analysisPlateaus analysisMix
 
 # Targets for experiments with fixed length (256-bit) bit vectors regardless of run length.
- 
+
+.PHONY: royal256
+royal256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000 false > R1.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 10000 false > R1.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 100000 false > R1.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000000 false > R1.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000 true > R2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 10000 true > R2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 100000 true > R2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000000 true > R2.1000k.1.txt
+
+.PHONY: analysisRoyal256
+analysisRoyal256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R1.1k.1.txt > R1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R1.10k.1.txt >> R1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R1.100k.1.txt >> R1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R1.1000k.1.txt >> R1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R2.1k.1.txt > R2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R2.10k.1.txt >> R2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R2.100k.1.txt >> R2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}R2.1000k.1.txt >> R2.summary.data.txt
+	
 .PHONY: mix256
 mix256:
 	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000 fixed > mix256.1k.1.txt
