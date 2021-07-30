@@ -71,13 +71,25 @@ public class LamTrackingTrap {
 		for (int i = 0; i < NUM_SAMPLES; i++) {
 			SolutionCostPair<BitVector> solution1 = sa1.optimize(RUN_LENGTH);
 			SolutionCostPair<BitVector> solution2 = sa2.optimize(RUN_LENGTH);
-			System.out.println(solution1.getCostDouble() + "\t" + solution2.getCostDouble());
-			if (solution1.getCostDouble()<=0.01) {
-				sa1.setProgressTracker(new ProgressTracker<BitVector>());
-			}
-			if (solution2.getCostDouble()<=0.01) {
-				sa2.setProgressTracker(new ProgressTracker<BitVector>());
-			}
+			
+			// Output best of run costs.
+			System.out.print(
+				sa1.getProgressTracker().containsIntCost() ? 
+				sa1.getProgressTracker().getCost() :
+				sa1.getProgressTracker().getCostDouble()
+			);
+			System.out.print("\t");
+			System.out.println(
+				sa2.getProgressTracker().containsIntCost() ? 
+				sa2.getProgressTracker().getCost() :
+				sa2.getProgressTracker().getCostDouble()
+			);
+			System.out.flush();
+			
+			// Reset the progress trackers for next run to avoid
+			// interaction between runs.
+			sa1.setProgressTracker(new ProgressTracker<BitVector>());
+			sa2.setProgressTracker(new ProgressTracker<BitVector>());
 		}
 		System.out.println("Acceptance Rate");
 		System.out.println(modifiedLam.getAcceptanceRate(0) + "\t" + selfTuningLam.getAcceptanceRate(0));
