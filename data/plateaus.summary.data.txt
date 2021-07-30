@@ -6,7 +6,7 @@ Cost function scale factor: 1
 
               MLam     MLam   MLam    STLam    STLam  STLam
 Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
-CostFunc   1280.00  1280.00 0.0000  1280.00  1280.00 0.0000      nan                    nan                    1.0
+CostFunc   2000.00  2000.00 0.0000  2000.00  2000.00 0.0000      nan                    nan                    1.0
 MSE       0.313600 0.497784 0.0000 0.313600 0.497784 0.0000     0.00                    1.0
 MSE.ph1   0.287656 0.236773 0.0119 0.287656 0.236773 0.0119     0.00                    1.0
 MSE.ph2   0.313600 0.313600 0.0000 0.313600 0.313600 0.0000     0.00                    1.0
@@ -21,7 +21,7 @@ Cost function scale factor: 1
 
               MLam     MLam   MLam    STLam    STLam  STLam
 Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
-CostFunc   5120.00  5120.00 0.0000  5120.00  5120.00 0.0000      nan                    nan                    1.0
+CostFunc   8000.00  8000.00 0.0000  8000.00  8000.00 0.0000      nan                    nan                    1.0
 MSE       0.313600 0.497781 0.0000 0.313600 0.497781 0.0000     0.00                    1.0
 MSE.ph1   0.287656 0.236756 0.0118 0.287656 0.236756 0.0118     0.00                    1.0
 MSE.ph2   0.313600 0.313600 0.0000 0.313600 0.313600 0.0000     0.00                    1.0
@@ -36,7 +36,7 @@ Cost function scale factor: 1
 
               MLam     MLam   MLam    STLam    STLam  STLam
 Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
-CostFunc  20480.00 20480.00 0.0000 20480.00 20480.00 0.0000      nan                    nan                    1.0
+CostFunc  32000.00 32000.00 0.0000 32000.00 32000.00 0.0000      nan                    nan                    1.0
 MSE       0.313600 0.497781 0.0000 0.313600 0.497781 0.0000     0.00                    1.0
 MSE.ph1   0.287656 0.236756 0.0118 0.287656 0.236756 0.0118     0.00                    1.0
 MSE.ph2   0.313600 0.313600 0.0000 0.313600 0.313600 0.0000     0.00                    1.0
@@ -51,7 +51,7 @@ Cost function scale factor: 1
 
               MLam     MLam   MLam    STLam    STLam  STLam
 Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
-CostFunc  81920.00 81920.00 0.0000 81920.00 81920.00 0.0000      nan                    nan                    1.0
+CostFunc  128000.00 128000.00 0.0000 128000.00 128000.00 0.0000      nan                    nan                    1.0
 MSE       0.313600 0.497781 0.0000 0.313600 0.497781 0.0000     0.00                    1.0
 MSE.ph1   0.287656 0.236756 0.0118 0.287656 0.236756 0.0118     0.00                    1.0
 MSE.ph2   0.313600 0.313600 0.0000 0.313600 0.313600 0.0000     0.00                    1.0
