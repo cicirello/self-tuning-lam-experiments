@@ -10,6 +10,14 @@ pathToDataFiles = "data/"
 .PHONY: build
 build:
 	mvn clean package
+
+# Runs all experiments
+
+.PHONY: experiments
+experiments: experiments256 experimentsVar
+
+.PHONY: analysis
+analysis: analysis256 analysisVar
 	
 # Run all with fixed length (256-bit) strings regardless of run length
 # Note that HollandRoyalRoad is actually with 240-bit strings.
