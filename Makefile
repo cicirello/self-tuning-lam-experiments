@@ -10,12 +10,145 @@ pathToDataFiles = "data/"
 .PHONY: build
 build:
 	mvn clean package
+	
+# Run all with fixed length (256-bit) strings regardless of run length
 
-.PHONY: experiments
+.PHONY: experiments256
+experiments: onemax256 twomax256 trap256 porcupine256 plateaus256 mix256
+
+.PHONY: analysis256
+analysis: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupine256 analysisPlateaus256 analysisMix256
+
+# Run all with variable length bit strings (varies based on run length)
+
+.PHONY: experimentsVar
 experiments: onemax twomax trap porcupine plateaus mix
 
-.PHONY: analysis
+.PHONY: analysisVar
 analysis: analysisOnemax analysisTwomax analysisTrap analysisPorcupine analysisPlateaus analysisMix
+
+# Targets for experiments with fixed length (256-bit) bit vectors regardless of run length.
+ 
+.PHONY: mix256
+mix256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000 fixed > mix256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 10000 fixed > mix256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 100000 fixed > mix256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000000 fixed > mix256.1000k.1.txt
+
+.PHONY: analysisMix256
+analysisMix256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix256.1k.1.txt > mix256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix256.10k.1.txt >> mix256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix256.100k.1.txt >> mix256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}mix256.1000k.1.txt >> mix256.summary.data.txt
+
+.PHONY: porcupine256
+porcupine256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 1000 fixed > porcupine256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 10000 fixed > porcupine256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 100000 fixed > porcupine256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 1000000 fixed > porcupine256.1000k.1.txt
+
+.PHONY: analysisPorcupine256
+analysisPorcupine256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine256.1k.1.txt > porcupine256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine256.10k.1.txt >> porcupine256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine256.100k.1.txt >> porcupine256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}porcupine256.1000k.1.txt >> porcupine256.summary.data.txt
+	
+.PHONY: plateaus256
+plateaus256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 1000 fixed > plateaus256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 10000 fixed > plateaus256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 100000 fixed > plateaus256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 1000000 fixed > plateaus256.1000k.1.txt
+
+.PHONY: analysisPlateaus256
+analysisPlateaus256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus256.1k.1.txt > plateaus256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus256.10k.1.txt >> plateaus256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus256.100k.1.txt >> plateaus256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}plateaus256.1000k.1.txt >> plateaus256.summary.data.txt
+
+.PHONY: trap256
+trap256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 1000 fixed > trap256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 10000 fixed > trap256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 100000 fixed > trap256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 1000000 fixed > trap256.1000k.1.txt
+
+.PHONY: analysisTrap256
+analysisTrap256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap256.1k.1.txt > trap256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap256.10k.1.txt >> trap256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap256.100k.1.txt >> trap256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}trap256.1000k.1.txt >> trap256.summary.data.txt
+
+.PHONY: twomax256
+twomax256:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000 fixed > twomax256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 10000 fixed > twomax256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 100000 fixed > twomax256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000000 fixed > twomax256.1000k.1.txt
+
+.PHONY: analysisTwomax256
+analysisTwomax256:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax256.1k.1.txt > twomax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax256.10k.1.txt >> twomax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax256.100k.1.txt >> twomax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}twomax256.1000k.1.txt >> twomax256.summary.data.txt
+
+.PHONY: onemax256
+onemax256: 
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 1 fixed > onemax256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 1 fixed > onemax256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 1 fixed > onemax256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 1 fixed > onemax256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 10 fixed > onemax256.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 10 fixed > onemax256.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 10 fixed > onemax256.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 10 fixed > onemax256.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 100 fixed > onemax256.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 100 fixed > onemax256.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 100 fixed > onemax256.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 100 fixed > onemax256.1000k.100.txt
+		
+.PHONY: analysisOnemax256
+analysisOnemax256:
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1k.1.txt > onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.10k.1.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.100k.1.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1000k.1.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1k.10.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.10k.10.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.100k.10.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1000k.10.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1k.100.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.10k.100.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.100k.100.txt >> onemax256.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}onemax256.1000k.100.txt >> onemax256.summary.data.txt
+
+
+
+# Targets for experiments with bit string lengths that increase with run length
 
 .PHONY: mix
 mix:
