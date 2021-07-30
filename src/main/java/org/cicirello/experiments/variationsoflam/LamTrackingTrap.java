@@ -42,9 +42,14 @@ public class LamTrackingTrap {
 		
 		final int NUM_SAMPLES = 100;
 		
-		final int BITS = RUN_LENGTH >= 1000000 ? 12800 :
-			(RUN_LENGTH >= 100000 ? 6400
-			: (RUN_LENGTH >= 10000 ? 960 : 192));
+		//final int BITS = RUN_LENGTH >= 1000000 ? 12800 :
+		//	(RUN_LENGTH >= 100000 ? 6400
+		//	: (RUN_LENGTH >= 10000 ? 960 : 192));
+		
+		final int BITS = RUN_LENGTH >= 1000000 ? 8192 :
+			(RUN_LENGTH >= 100000 ? 2048
+			: (RUN_LENGTH >= 10000 ? 512 : 128));
+		
 		final int BIT_LENGTH = BITS; 
 		Trap problem = new Trap();
 		final int MAX_BITS_MUTATE = 1;
