@@ -33,22 +33,23 @@ public class LamTrackingPorcupine {
 	
 	/**
 	 * Runs the experiment.
-	 * @param args There is an optional command line argument. args[0] is
+	 * @param args There are optional command line arguments. args[0] is
 	 * the length of the simulated annealing runs in maximum number of evaluations
-	 * which has a default of 1000 if not specified on the command line.
+	 * which has a default of 1000 if not specified on the command line. If args[1] is "fixed",
+	 * then the bit strings are of a fixed length independent of run length, where that
+	 * length is 256 bits.
 	 */
 	public static void main(String[] args) {
 		final int RUN_LENGTH = args.length > 0 ? Integer.parseInt(args[0]) : 1000;
 		
+		final boolean FIXED_BITLENGTH = args.length > 2 && args[2].equalsIgnoreCase("fixed");
+		
 		final int NUM_SAMPLES = 100;
 		
-		//final int BITS = RUN_LENGTH >= 1000000 ? 12800 :
-		//	(RUN_LENGTH >= 100000 ? 6400
-		//	: (RUN_LENGTH >= 10000 ? 960 : 192));
-		
-		final int BITS = RUN_LENGTH >= 1000000 ? 12800 :
+		final int BITS = FIXED_BITLENGTH ? 256 : 
+			(RUN_LENGTH >= 1000000 ? 12800 :
 			(RUN_LENGTH >= 100000 ? 3200
-			: (RUN_LENGTH >= 10000 ? 800 : 200));
+			: (RUN_LENGTH >= 10000 ? 800 : 200)));
 		
 		final int BIT_LENGTH = BITS; 
 		Porcupine problem = new Porcupine();
