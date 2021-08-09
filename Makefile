@@ -20,7 +20,7 @@ experiments: experiments256 experimentsVar
 analysis: analysis256 analysisVar
 
 
-# Runs continuous optimization problems
+# Runs all continuous optimization problems
 
 .PHONY: experimentsContinuous
 experimentsContinuous: GL
@@ -28,22 +28,91 @@ experimentsContinuous: GL
 .PHONY: analysisContinuous
 analysisContinuous: analysisGL
 
+# Runs Forrester
+
+.PHONY: F1
+F1:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 1 > F1.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 1 > F1.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 1 > F1.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 1 > F1.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 1 > F1.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 1 > F1.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 1 > F1.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 1 > F1.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 1 > F1.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 1 > F1.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 1 > F1.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 1 > F1.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 1 > F1.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 1 > F1.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 1 > F1.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 1 > F1.1000k.1000.txt
+
+.PHONY: analysisF1
+analysisF1:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1k.1.txt > F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.10k.1.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.100k.1.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1000k.1.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1k.10.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.10k.10.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.100k.10.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1000k.10.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1k.100.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.10k.100.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.100k.100.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1000k.100.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1k.1000.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.10k.1000.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.100k.1000.txt >> F1.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F1.1000k.1000.txt >> F1.summary.data.txt
+
+# Runs gramacylee
+
 .PHONY: GL
 GL:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 0 > gramacylee.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 0 > gramacylee.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 0 > gramacylee.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 0 > gramacylee.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 0 > gramacylee.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 0 > gramacylee.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 0 > gramacylee.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 0 > gramacylee.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 0 > gramacylee.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 0 > gramacylee.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 0 > gramacylee.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 0 > gramacylee.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 0 > gramacylee.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 0 > gramacylee.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 0 > gramacylee.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 0 > gramacylee.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 0 > gramacylee.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 0 > gramacylee.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 0 > gramacylee.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 0 > gramacylee.1000k.1000.txt
 
 .PHONY: analysisGL
 analysisGL:
 	$(py) -m pip install --user pycairo
 	$(py) -m pip install --user scipy
 	$(py) -m pip install --user matplotlib
-	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.1k.1.txt > gramacylee.summary.data.txt
-	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.10k.1.txt >> gramacylee.summary.data.txt
-	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.100k.1.txt >> gramacylee.summary.data.txt
-	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.1000k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1k.1.txt > gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.10k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.100k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1000k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1k.10.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.10k.10.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.100k.10.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1000k.10.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1k.100.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.10k.100.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.100k.100.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1000k.100.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1k.1000.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.10k.1000.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.100k.1000.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}gramacylee.1000k.1000.txt >> gramacylee.summary.data.txt
 	
 # Run all with fixed length (256-bit) strings regardless of run length
 # Note that HollandRoyalRoad is actually with 240-bit strings.
