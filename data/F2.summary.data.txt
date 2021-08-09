@@ -1,0 +1,240 @@
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 1
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  0.665096 1.158731 0.0000 0.665096 1.954608 0.0000    -3.61  0.0003934391408677104    0.13229128607995433
+MSE       0.067600 0.127129 0.0000 0.001600 0.003170 0.0000    15.09  6.899280036460592e-35
+MSE.ph1   0.052037 0.054174 0.1444 0.003419 0.005485 0.0000     7.68  7.836754974169503e-09
+MSE.ph2   0.048400 0.051573 0.0001 0.001600 0.002208 0.0000    19.23 1.6181680545025648e-35
+MSE.ph3   0.287738 0.267375 0.0250 0.002528 0.003520 0.0000    26.04 1.7231963111881813e-37
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 1
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  0.665095 0.665095 0.0000 0.665095 0.665095 0.0000    -0.27     0.7860391027180177    0.42713640946700937
+MSE       0.009603 0.017426 0.0000 0.000400 0.001609 0.0000    10.85  4.462567619651748e-22
+MSE.ph1   0.034456 0.039691 0.0395 0.000271 0.002384 0.0000     7.44 1.4340881759440479e-08
+MSE.ph2   0.001600 0.004007 0.0000 0.000900 0.002131 0.0000     2.96   0.003543435486414399
+MSE.ph3   0.023514 0.026737 0.0003 0.000049 0.000519 0.0000    13.39  5.825549826746031e-21
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 1
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  0.665095 0.665095 0.0000 0.665095 0.665095 0.0000    -0.70     0.4829280843477315     0.7350547208845939
+MSE       0.000845 0.002547 0.0000 0.000670 0.001944 0.0000     1.27    0.20510960828365704
+MSE.ph1   0.001929 0.006406 0.0000 0.001521 0.003230 0.0001     1.33    0.19314979764494605
+MSE.ph2   0.000900 0.002605 0.0000 0.001600 0.002369 0.0000     0.47     0.6386044434872955
+MSE.ph3   0.000085 0.000755 0.0000 0.000055 0.000768 0.0000    -0.05       0.96150514937881
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 1
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  0.665095 0.665095 0.0000 0.665095 0.665095 0.0000    -0.86    0.38969430573611263     0.9328203638703755
+MSE       0.000568 0.002285 0.0000 0.000400 0.001784 0.0000     1.18     0.2384857581456105
+MSE.ph1   0.001771 0.004958 0.0000 0.000752 0.002198 0.0000     1.38    0.17712031440584378
+MSE.ph2   0.001600 0.002728 0.0000 0.000900 0.002462 0.0000     0.51     0.6078130734118775
+MSE.ph3   0.000039 0.000468 0.0000 0.000077 0.000632 0.0000    -0.76     0.4475027957873987
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 10
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  6.650963 21.459946 0.0000 6.650962 15.383236 0.0000     2.47   0.014238972847903986    0.43141580292333026
+MSE       0.025600 0.044525 0.0000 0.002261 0.004014 0.0000    12.65 1.6067176184397735e-27
+MSE.ph1   0.034418 0.055420 0.0020 0.002250 0.006073 0.0000     4.87 3.0775634297863375e-05
+MSE.ph2   0.014400 0.016291 0.0544 0.001600 0.003378 0.0000    10.54 2.6120269845731427e-19
+MSE.ph3   0.087977 0.080035 0.0523 0.002500 0.004009 0.0000    14.66  4.183498209928376e-23
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 10
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  6.650951 15.764173 0.0000 6.650951 6.650951 0.0000     5.59 1.9975165266752632e-07  0.0077379800256005314
+MSE       0.005559 0.018643 0.0000 0.000400 0.001947 0.0000     6.44  8.454948070390245e-10
+MSE.ph1   0.004506 0.043212 0.0000 0.002072 0.004390 0.0003     2.74   0.010112170358381163
+MSE.ph2   0.001250 0.003001 0.0000 0.000900 0.002255 0.0000     1.37    0.17346588193283877
+MSE.ph3   0.026543 0.030109 0.0307 0.000103 0.000424 0.0000    12.26  4.866813965039713e-19
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 10
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  6.650951 6.650951 0.0000 6.650951 6.650951 0.0000     0.49     0.6272321777594696     0.9095409481941399
+MSE       0.000409 0.005202 0.0000 0.000400 0.001840 0.0000     1.73    0.08533833468249442
+MSE.ph1   0.001453 0.024761 0.0000 0.001224 0.003036 0.0341     1.80    0.08181053512041743
+MSE.ph2   0.001600 0.002498 0.0000 0.000900 0.002426 0.0000     0.16     0.8757629912741647
+MSE.ph3   0.000074 0.000403 0.0000 0.000079 0.000472 0.0000    -0.43     0.6654710645847075
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 10
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  6.650951 6.650951 0.0000 6.650951 6.650951 0.0000     1.35      0.178430065050167     0.5429196699883654
+MSE       0.000498 0.003396 0.0000 0.000400 0.001862 0.0000     0.97     0.3338734999921583
+MSE.ph1   0.001332 0.013287 0.0000 0.002249 0.003555 0.0781     0.97     0.3414791612898367
+MSE.ph2   0.001600 0.002307 0.0000 0.000900 0.002240 0.0000     0.15      0.877486029461163
+MSE.ph3   0.000049 0.000570 0.0000 0.000060 0.000573 0.0000    -0.01     0.9939002909499681
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 100
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  66.509566 199.410771 0.0000 66.509626 181.875834 0.0000     0.70     0.4852027416254948     0.5125783581197875
+MSE       0.084100 0.077238 0.0000 0.001479 0.003255 0.0000    18.23 1.1916677221784733e-44
+MSE.ph1   0.125241 0.153866 0.0945 0.001586 0.005705 0.0000    12.87  4.650469599310417e-14
+MSE.ph2   0.096100 0.096846 0.7448 0.000900 0.001715 0.0000    48.51 4.5246550582513106e-72
+MSE.ph3   0.013803 0.015290 0.0000 0.002472 0.004369 0.0000     7.18 1.5472153393101412e-10
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 100
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  66.509513 172.830434 0.0000 66.509512 66.509513 0.0000     6.20 1.2792772099277664e-08 1.5098823523813074e-05
+MSE       0.014063 0.039179 0.0000 0.000515 0.002178 0.0000     6.76 1.4343765336299938e-10
+MSE.ph1   0.094827 0.153703 0.0000 0.001262 0.003226 0.0000     5.74  2.861116110065038e-06
+MSE.ph2   0.002500 0.009335 0.0000 0.000900 0.002879 0.0000     3.62 0.00044014687029933866
+MSE.ph3   0.025910 0.031097 0.0220 0.000092 0.000713 0.0000    11.77 3.0390652762368784e-18
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 100
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  66.509512 70.306688 0.0000 66.509512 66.509512 0.0000     1.00    0.31974847435749754     0.6530107478401487
+MSE       0.000400 0.011072 0.0000 0.000400 0.002145 0.0000     2.11    0.03631736836278395
+MSE.ph1   0.002126 0.062860 0.0000 0.002976 0.004410 0.0000     2.27    0.03080193293795986
+MSE.ph2   0.000900 0.002243 0.0000 0.000900 0.002726 0.0000    -0.81     0.4217879467061525
+MSE.ph3   0.000109 0.000751 0.0000 0.000091 0.000312 0.0000     1.95    0.05479518587542895
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 100
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  66.509512 66.509512 0.0000 66.509512 66.509512 0.0000    -0.47      0.640304773710688     0.5477909220564307
+MSE       0.000400 0.003316 0.0000 0.000400 0.001503 0.0000     1.37    0.17222080808101817
+MSE.ph1   0.001329 0.010670 0.0000 0.000594 0.001372 0.0000     1.11    0.27422932404500305
+MSE.ph2   0.001600 0.002921 0.0000 0.000900 0.002068 0.0000     1.57    0.11729209446008133
+MSE.ph3   0.000049 0.000622 0.0000 0.000073 0.000752 0.0000    -0.44     0.6610998965494823
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000
+Cost function scale factor: 1000
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  665.097456 2373.825657 0.0000 665.095717 1562.384569 0.0000     3.27  0.0012834957810349712  0.0063475598026593825
+MSE       0.144400 0.114091 0.0000 0.002267 0.004018 0.0000    19.01  7.379595298113962e-47
+MSE.ph1   0.197631 0.207752 0.1627 0.002273 0.005770 0.0000    23.68  9.865444566288672e-22
+MSE.ph2   0.160000 0.157682 0.1041 0.001600 0.003039 0.0000    95.95 2.138735408575632e-108
+MSE.ph3   0.001381 0.010338 0.0000 0.003108 0.004639 0.0000     2.03   0.045823092749623116
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 10000
+Cost function scale factor: 1000
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  665.095129 1690.332586 0.0000 665.095127 665.095137 0.0000     6.05 2.5755950820289553e-08  0.0024471393240056874
+MSE       0.042082 0.075201 0.0000 0.000659 0.002042 0.0000    10.47  9.854461802873851e-21
+MSE.ph1   0.177439 0.240360 0.0000 0.001438 0.003062 0.0031     9.03 4.5732009492220257e-10
+MSE.ph2   0.040000 0.053525 0.0011 0.000900 0.002696 0.0000     9.93 1.3608098142509594e-16
+MSE.ph3   0.027577 0.033026 0.0000 0.000228 0.000656 0.0000    10.54  4.811116326127745e-16
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 100000
+Cost function scale factor: 1000
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  665.095123 741.038637 0.0000 665.095123 665.095123 0.0000     1.42    0.15833990588204408     0.1978622735104827
+MSE       0.000400 0.016913 0.0000 0.000407 0.001761 0.0000     2.67   0.008161249462582051
+MSE.ph1   0.004144 0.102239 0.0000 0.001028 0.002369 0.0001     3.01       0.00524865823596
+MSE.ph2   0.000900 0.001802 0.0000 0.000900 0.002274 0.0000    -1.09      0.275986998029592
+MSE.ph3   0.000075 0.000714 0.0000 0.000085 0.000760 0.0000    -0.17     0.8636931265759396
+
+
+CostFunc = End of Run Costs.
+MSE = The MSE between target rate and observed rate
+MSE.Ph# = The MSE between target rate and observed rate during phase #
+Run Length (in SA iterations): 1000000
+Cost function scale factor: 1000
+
+              MLam     MLam   MLam    STLam    STLam  STLam
+Measure     Median     Mean  Pnorm   Median     Mean  Pnorm   t-stat         T-Test P-value Wilcoxon ranksum P-val
+CostFunc  665.095123 665.095123 0.0000 665.095123 665.095123 0.0000     0.55     0.5809859888825706     0.5477909220564307
+MSE       0.000626 0.004802 0.0000 0.000670 0.002100 0.0000     1.32    0.18707469977807137
+MSE.ph1   0.001061 0.021325 0.0000 0.001149 0.002600 0.0000     1.46    0.15564210300580386
+MSE.ph2   0.000900 0.002615 0.0000 0.001600 0.002939 0.0000    -0.58     0.5617823661104986
+MSE.ph3   0.000068 0.000610 0.0000 0.000064 0.000679 0.0000    -0.25     0.8022696453614843
+
+
