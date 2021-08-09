@@ -18,6 +18,32 @@ experiments: experiments256 experimentsVar
 
 .PHONY: analysis
 analysis: analysis256 analysisVar
+
+
+# Runs continuous optimization problems
+
+.PHONY: experimentsContinuous
+experimentsContinuous: GL
+
+.PHONY: analysisContinuous
+analysisContinuous: analysisGL
+
+.PHONY: GL
+GL:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 0 > gramacylee.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 0 > gramacylee.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 0 > gramacylee.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 0 > gramacylee.1000k.1.txt
+
+.PHONY: analysisGL
+analysisGL:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.1k.1.txt > gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.10k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.100k.1.txt >> gramacylee.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPoint.py ${pathToDataFiles}gramacylee.1000k.1.txt >> gramacylee.summary.data.txt
 	
 # Run all with fixed length (256-bit) strings regardless of run length
 # Note that HollandRoyalRoad is actually with 240-bit strings.
