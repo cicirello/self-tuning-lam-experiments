@@ -29,6 +29,7 @@ import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.SolutionCostPair;
 import org.cicirello.search.ProgressTracker;
 import org.cicirello.search.operators.reals.UndoableGaussianMutation;
+import org.cicirello.search.problems.CostFunctionScaler;
 
 
 public class LamTrackingContinuousProblems {
@@ -37,17 +38,21 @@ public class LamTrackingContinuousProblems {
 	 * Runs the experiment.
 	 * @param args Command line arguments include: args[0] is
 	 * the length of the simulated annealing runs in maximum number of evaluations.
-	 * args[1] indicates which problem to solve, 0 for GramacyLee2012, 1 for original 
+	 * args[1] is a scale factor, to scale all cost values by.
+	 * args[2] indicates which problem to solve, 0 for GramacyLee2012, 1 for original 
 	 * ForresterEtAl2008, 2 for lower fidelity version of ForresterEtAl2008.
 	 */
 	public static void main(String[] args) {
 		final int RUN_LENGTH = Integer.parseInt(args[0]);
 		
-		double sigma = 0.01;
+		final int SCALE = Integer.parseInt(args[1]);
+		
+		double sigma = 0.05;
 		
 		OptimizationProblem<SingleReal> problem = null;
+		OptimizationProblem<SingleReal> scaled = null;
 		Initializer<SingleReal> init = null;
-		int P = Integer.parseInt(args[1]);
+		int P = Integer.parseInt(args[2]);
 		switch (P) {
 			case 0: {
 				problem = new GramacyLee2012();
@@ -69,6 +74,7 @@ public class LamTrackingContinuousProblems {
 			System.err.println("Unknown problem requested. Exiting.");
 			System.exit(1);
 		}
+		scaled = new CostFunctionScaler<SingleReal>(problem, SCALE);
 		
 		final int NUM_SAMPLES = 100;
 		
@@ -79,14 +85,14 @@ public class LamTrackingContinuousProblems {
 		UndoableGaussianMutation<SingleReal> mutation2 = UndoableGaussianMutation.createGaussianMutation​(sigma);
 		
 		SimulatedAnnealing<SingleReal> sa1 = new SimulatedAnnealing<SingleReal>(
-			problem, 
+			scaled, 
 			mutation1,
 			init,
 			modifiedLam
 		);
 		
 		SimulatedAnnealing<SingleReal> sa2 = new SimulatedAnnealing<SingleReal>(
-			problem, 
+			scaled, 
 			mutation2, 
 			init,
 			selfTuningLam
