@@ -14,21 +14,63 @@ build:
 # Runs all experiments
 
 .PHONY: experiments
-experiments: experiments256 experimentsVar
+experiments: experimentsContinuous experiments256 experimentsVar 
 
 .PHONY: analysis
-analysis: analysis256 analysisVar
-
+analysis: analysisContinuous analysis256 analysisVar
 
 # Runs all continuous optimization problems
 
 .PHONY: experimentsContinuous
-experimentsContinuous: GL
+experimentsContinuous: GL F1 F2
 
 .PHONY: analysisContinuous
-analysisContinuous: analysisGL
+analysisContinuous: analysisGL analysisF1 analysisF2
 
-# Runs Forrester
+# Runs Forrester Lower Fidelity
+
+.PHONY: F2
+F2:
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 2 > F2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 2 > F2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 2 > F2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 2 > F2.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 2 > F2.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 2 > F2.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 2 > F2.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 2 > F2.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 2 > F2.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 2 > F2.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 2 > F2.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 2 > F2.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 2 > F2.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 2 > F2.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 2 > F2.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 2 > F2.1000k.1000.txt
+
+.PHONY: analysisF2
+analysisF2:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1k.1.txt > F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.10k.1.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.100k.1.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1000k.1.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1k.10.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.10k.10.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.100k.10.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1000k.10.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1k.100.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.10k.100.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.100k.100.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1000k.100.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1k.1000.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.10k.1000.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.100k.1000.txt >> F2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsContinuousProblems.py ${pathToDataFiles}F2.1000k.1000.txt >> F2.summary.data.txt
+
+# Runs Forrester Original
 
 .PHONY: F1
 F1:
