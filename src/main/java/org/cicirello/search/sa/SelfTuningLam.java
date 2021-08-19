@@ -24,42 +24,36 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * <p>UPDATE THIS BEFORE MAKING IT PUBLIC</p>
- * 
- * <p>This class implements an optimized variant of the Modified Lam annealing schedule. 
- * The Modified Lam annealing schedule dynamically
+ *
+ * <p>This class implements the Self-Tuning Lam annealing schedule, which is
+ * an improved variation of the Modified Lam annealing schedule. The original 
+ * Modified Lam annealing schedule dynamically
  * adjusts simulated annealing's temperature parameter up and down to either decrease
  * or increase the neighbor acceptance rate as necessary to attempt to match 
- * a theoretically determined ideal.  The Modified Lam annealing schedule is
+ * a theoretically determined ideal. The Modified Lam annealing schedule is
  * a practical realization of Lam and Delosme's (1988) schedule, 
  * refined first by Swartz (1993) and
- * then further by Boyan (1998).</p> 
+ * then further by Boyan (1998), and later optimized further by Cicirello (2020). 
+ * The Modified Lam annealing schedule is, however, somewhat sensitive to
+ * the magnitude of cost function differences relative to neighboring solutions.
+ * In particular, the temperature can be slow to converge to that needed
+ * to achieve the target track of the rate of acceptance. The Self-Tuning
+ * Lam schedule is a new variation that uses early samples of the cost function
+ * to fine-tune several annealing parameters to almost instantaneously achieve
+ * the target rate of acceptance, and to better match it throughout the run.
+ * This Self-Tuning Lam schedule is not sensitive to cost function value magnitude,
+ * nor to run length.</p>
  *
- * <p>This optimized version of the Modified Lam is described in the following
- * article:<br>
- * Vincent A. Cicirello. 2020. 
+ *
+ * <p>For details of the original Modified Lam, as well as prior optimizations,
+ * see the following papers:</p>
+ * <ul>
+ * <li>Vincent A. Cicirello. 2020. 
  * <a href=https://www.cicirello.org/publications/eai.16-12-2020.167653.pdf>Optimizing 
  * the Modified Lam Annealing Schedule</a>.
  * <i>Industrial Networks and Intelligent Systems</i>, 7(25): 1-11, Article e1 (December 2020).
  * doi:<a href=https://doi.org/10.4108/eai.16-12-2020.167653>10.4108/eai.16-12-2020.167653</a>.
- * </p>
- *
- * <p>This optimized Java implementation is significantly faster than the 
- * implementation that would result from a direct implementation as described
- * originally by Boyan (1998). Specifically, in the original Boyan's Modified Lam,
- * the update of the target rate of acceptance involves an
- * exponentiation. This update occurs once for each iteration of simulated annealing.
- * However, in the Optimized Modified Lam of Cicirello (2020), the target rate is 
- * instead computed incrementally from the prior
- * rate. If the simulated annealing run is n evaluations in length, then the
- * direct implementation of Boyan's Modified Lam schedule performs
- * n/2 exponentiations in total across all updates of the target rate; 
- * while the Optimized Modified Lam instead perform only 2 exponentiations and n/2
- * multiplications total across all updates of the target rate. The schedule of target
- * acceptance rates is otherwise the same.</p>
- *
- * <p>For details of the original Modified Lam schedule, such as 
- * its origins and rationale, see the following references:</p>
- * <ul>
+ * </li>
  * <li>Lam, J., and Delosme, J. 1988. Performance of a new annealing schedule. 
  * In Proc. 25th ACM/IEEE DAC, 306–311.</li>
  * <li>Swartz, W. P. 1993. Automatic Layout of Analog and Digital Mixed 
@@ -71,11 +65,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * <p>The Chips-n-Salsa library also includes an implementation of the original
  * Modified Lam schedule that is the result of a direct
  * implementation of Boyan's description of the annealing schedule,
- * see the {@link ModifiedLamOriginal} class for that version.</p>
+ * in the {@link ModifiedLamOriginal} class, as well as Cicirello's Optimized
+ * Modified Lam in the {@link ModifiedLam} class.</p>
  *
  * <p>The {@link #accept} methods of this class use the classic, and most common,
  * Boltzmann distribution for determining whether to accept a neighbor.</p>
- *
  *
  * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
  * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
