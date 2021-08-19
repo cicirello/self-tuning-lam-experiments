@@ -25,18 +25,18 @@ import static org.junit.Assert.*;
 import org.cicirello.math.rand.RandomIndexer;
 
 /**
- * JUnit 4 test cases for the Self-Tuning Modified Lam annealing schedule.
+ * JUnit 4 test cases for the Self-Tuning Lam annealing schedule.
  */
-public class SelfTuningModifiedLamTests {
+public class SelfTuningLamTests {
 	
 	private static final double EPSILON = 1e-10;
 	
 	@Test
 	public void testSplit() {
-		SelfTuningModifiedLam mOriginal = new SelfTuningModifiedLam();
+		SelfTuningLam mOriginal = new SelfTuningLam();
 		mOriginal.init(500);
 		for (int i = 0; i < 10; i++) mOriginal.accept(3, 2);
-		SelfTuningModifiedLam m = mOriginal.split();
+		SelfTuningLam m = mOriginal.split();
 		m.init(100);
 		//assertEquals("target rate at start of run", 1.0, m.getTargetRate(), EPSILON);
 		for (int i = 0; i < 15; i++) m.accept(3, 2);
@@ -55,7 +55,7 @@ public class SelfTuningModifiedLamTests {
 	public void testTargetRate() {
 		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
 		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
-		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
+		SelfTuningLam m = new SelfTuningLam();
 		m.init(100);
 		m.accept(3, 2);
 		assertEquals("target rate after tuning", LAM_RATE_ONE_PERCENT_OF_RUN, m.getTargetRate(), EPSILON);
@@ -117,7 +117,7 @@ public class SelfTuningModifiedLamTests {
 	public void testAccept() {
 		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
 		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
-		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
+		SelfTuningLam m = new SelfTuningLam();
 		double alpha = 2.0 / 11.0;
 		m.init(1000);
 		double expected = LAM_RATE_ONE_PERCENT_OF_RUN;
@@ -219,7 +219,7 @@ public class SelfTuningModifiedLamTests {
 	public void testTemperatureInitialization() {
 		final double LAM_RATE_POINT_ONE_PERCENT_OF_RUN = 0.9768670788789564;
 		final double LAM_RATE_ONE_PERCENT_OF_RUN = 0.8072615745900611;
-		SelfTuningModifiedLam m = new SelfTuningModifiedLam();
+		SelfTuningLam m = new SelfTuningLam();
 		
 		// Tests with 1000 evals for 0.01 percent of run case
 		m.init(1000);

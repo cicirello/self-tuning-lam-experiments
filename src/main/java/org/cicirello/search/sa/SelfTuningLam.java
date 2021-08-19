@@ -81,7 +81,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
  * @version 1.22.2021
  */
-public final class SelfTuningModifiedLam implements AnnealingSchedule {
+public final class SelfTuningLam implements AnnealingSchedule {
 	
 	private double t;
 	private double acceptRate;
@@ -110,13 +110,13 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	private static final double LAM_RATE_02 = 0.6808590431613767;
 	
 	/**
-	 * Default constructor.  The Self-Tuning Modified Lam annealing schedule,
+	 * Default constructor.  The Self-Tuning Lam annealing schedule,
 	 * unlike other annealing schedules, has no control parameters
 	 * other than the run length (the maxEvals parameter of the
 	 * {@link #init} method), so no parameters need be passed to
 	 * the constructor.
 	 */
-	public SelfTuningModifiedLam() {
+	public SelfTuningLam() {
 		lastMaxEvals = -1;
 	}
 	
@@ -187,8 +187,8 @@ public final class SelfTuningModifiedLam implements AnnealingSchedule {
 	}
 	
 	@Override
-	public SelfTuningModifiedLam split() {
-		return new SelfTuningModifiedLam();
+	public SelfTuningLam split() {
+		return new SelfTuningLam();
 	}
 	
 	private void doPhaseZeroUpdate(double neighborCost, double currentCost) {

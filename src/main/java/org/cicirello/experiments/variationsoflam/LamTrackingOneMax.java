@@ -24,7 +24,7 @@ import org.cicirello.search.problems.OneMax;
 import org.cicirello.search.representations.BitVector;
 import org.cicirello.search.sa.ModifiedLam;
 import org.cicirello.search.sa.SimulatedAnnealing;
-import org.cicirello.search.sa.SelfTuningModifiedLam;
+import org.cicirello.search.sa.SelfTuningLam;
 import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.problems.IntegerCostFunctionScaler;
 import org.cicirello.search.SolutionCostPair;
@@ -60,7 +60,7 @@ public class LamTrackingOneMax {
 		final int MAX_BITS_MUTATE = 1;
 		
 		AcceptanceTracker modifiedLam = new AcceptanceTracker(new ModifiedLam());
-		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningModifiedLam());
+		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningLam());
 		
 		SimulatedAnnealing<BitVector> sa1 = new SimulatedAnnealing<BitVector>(
 			problem, 

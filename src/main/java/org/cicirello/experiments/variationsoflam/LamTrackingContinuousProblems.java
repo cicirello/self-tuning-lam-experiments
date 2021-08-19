@@ -24,7 +24,7 @@ import org.cicirello.search.operators.Initializer;
 import org.cicirello.search.operators.reals.RealValueInitializer;
 import org.cicirello.search.sa.ModifiedLam;
 import org.cicirello.search.sa.SimulatedAnnealing;
-import org.cicirello.search.sa.SelfTuningModifiedLam;
+import org.cicirello.search.sa.SelfTuningLam;
 import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.SolutionCostPair;
 import org.cicirello.search.ProgressTracker;
@@ -79,7 +79,7 @@ public class LamTrackingContinuousProblems {
 		final int NUM_SAMPLES = 100;
 		
 		AcceptanceTracker modifiedLam = new AcceptanceTracker(new ModifiedLam());
-		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningModifiedLam());
+		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningLam());
 		
 		UndoableGaussianMutation<SingleReal> mutation1 = UndoableGaussianMutation.createGaussianMutation​(sigma);
 		UndoableGaussianMutation<SingleReal> mutation2 = UndoableGaussianMutation.createGaussianMutation​(sigma);
