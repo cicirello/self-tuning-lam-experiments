@@ -164,6 +164,7 @@ if __name__ == "__main__" :
     numRuns = int(sys.argv[2]) if len(sys.argv) > 2 else 100
 
     figureFilename = dataFilenameToFigureFilename(datafile, "svg")
+    epsFilename = dataFilenameToFigureFilename(datafile, "eps")
 
     runLength, scale = parseFilename(datafile)
     #algNames, costs, rates = extractRawData(datafile, runLength, numRuns)
@@ -385,6 +386,7 @@ if __name__ == "__main__" :
     ax.legend()
     ax.text(0.7, 0.6, p_text)
     matplotlib.pyplot.savefig(figureFilename)
+    matplotlib.pyplot.savefig(epsFilename)
 
 ## Previously tried smoothing the data, but this
 ## is not really necessary if we sample the acceptance rates
