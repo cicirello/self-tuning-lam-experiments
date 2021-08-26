@@ -239,6 +239,10 @@ public final class SelfTuningLam implements AnnealingSchedule {
 			t = costAverage * (lastMaxEvals >= 10000 ? 0.3141120890121576 : 0.18987910472222955);
 			// The above is logically equivalent to:
 			// t = -costAverage / Math.log(0.001 / (1.001 - acceptRate));
+			
+			// The following is equivalent to computing:
+			// The M-th root of Zeta_{2M} / Zeta_{M}, where M is phase0,
+			// Zeta_M is -1 / Math.log(0.001 / (1.001 - LamRate(M))).
 			beta = Math.pow(
 				lastMaxEvals >= 10000 ? 0.8300587656396743: 0.912935823058667,
 				1.0 / phase0
