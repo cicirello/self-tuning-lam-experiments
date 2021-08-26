@@ -225,9 +225,11 @@ public final class SelfTuningLam implements AnnealingSchedule {
 					1.0 / phase0
 				);
 			} else {
+				// The constants used here are -Zeta_{2M} where where M is phase0,
+			    // Zeta_{2M} is -1 / Math.log(0.001 / (1.001 - LamRate(2M))).
 				beta = Math.pow(denom *
-					(lastMaxEvals >= 10000 ? -0.3141120890121576 
-						: -0.18987910472222955),
+					(lastMaxEvals >= 10000 ? -0.260731492877931   
+						: -0.17334743675123146),
 					1.0 / phase0
 				);
 			}
