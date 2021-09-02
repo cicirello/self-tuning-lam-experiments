@@ -11,6 +11,15 @@ pathToDataFiles = "data/"
 build:
 	mvn clean package
 
+# Generates special figures for paper
+
+.PHONY: specialFigures
+specialFigures:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/GraphLamRate.py
+
 # Runs all experiments
 
 .PHONY: experiments
