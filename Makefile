@@ -18,6 +18,7 @@ specialFigures:
 	$(py) -m pip install --user pycairo
 	$(py) -m pip install --user scipy
 	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/GraphContinuousFunctions.py
 	$(py) src/analysis/GraphLamRate.py
 
 # Runs all experiments
