@@ -102,7 +102,7 @@ if __name__ == "__main__" :
     matplotlib.pyplot.rc('text', usetex=True)
     fig, ax = matplotlib.pyplot.subplots(figsize=(w,h), constrained_layout=True)
     matplotlib.pyplot.xlabel('x')
-    matplotlib.pyplot.ylabel('f(x)')
+    matplotlib.pyplot.ylabel('g(x)')
     line, = ax.plot(xVals3, g, '-k')
     matplotlib.pyplot.savefig("data/g-graph.svg")
     matplotlib.pyplot.savefig("data/g-graph.eps")
