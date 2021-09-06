@@ -41,22 +41,22 @@ analysisContinuous: analysisGL analysisF1 analysisF2
 
 .PHONY: F2
 F2:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 2 > F2.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 2 > F2.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 2 > F2.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 2 > F2.1000k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 2 > F2.1k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 2 > F2.10k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 2 > F2.100k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 2 > F2.1000k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 2 > F2.1k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 2 > F2.10k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 2 > F2.100k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 2 > F2.1000k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 2 > F2.1k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 2 > F2.10k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 2 > F2.100k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 2 > F2.1000k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1 2 > F2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1 2 > F2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1 2 > F2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1 2 > F2.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 10 2 > F2.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 10 2 > F2.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 10 2 > F2.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 10 2 > F2.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 100 2 > F2.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 100 2 > F2.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 100 2 > F2.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 100 2 > F2.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1000 2 > F2.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1000 2 > F2.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1000 2 > F2.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1000 2 > F2.1000k.1000.txt
 
 .PHONY: analysisF2
 analysisF2:
@@ -84,22 +84,22 @@ analysisF2:
 
 .PHONY: F1
 F1:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 1 > F1.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 1 > F1.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 1 > F1.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 1 > F1.1000k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 1 > F1.1k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 1 > F1.10k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 1 > F1.100k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 1 > F1.1000k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 1 > F1.1k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 1 > F1.10k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 1 > F1.100k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 1 > F1.1000k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 1 > F1.1k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 1 > F1.10k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 1 > F1.100k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 1 > F1.1000k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1 1 > F1.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1 1 > F1.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1 1 > F1.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1 1 > F1.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 10 1 > F1.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 10 1 > F1.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 10 1 > F1.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 10 1 > F1.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 100 1 > F1.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 100 1 > F1.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 100 1 > F1.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 100 1 > F1.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1000 1 > F1.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1000 1 > F1.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1000 1 > F1.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1000 1 > F1.1000k.1000.txt
 
 .PHONY: analysisF1
 analysisF1:
@@ -127,22 +127,22 @@ analysisF1:
 
 .PHONY: GL
 GL:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1 0 > gramacylee.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1 0 > gramacylee.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1 0 > gramacylee.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1 0 > gramacylee.1000k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 10 0 > gramacylee.1k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 10 0 > gramacylee.10k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 10 0 > gramacylee.100k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 10 0 > gramacylee.1000k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 100 0 > gramacylee.1k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 100 0 > gramacylee.10k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 100 0 > gramacylee.100k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 100 0 > gramacylee.1000k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000 1000 0 > gramacylee.1k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 10000 1000 0 > gramacylee.10k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 100000 1000 0 > gramacylee.100k.1000.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingContinuousProblems 1000000 1000 0 > gramacylee.1000k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1 0 > gramacylee.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1 0 > gramacylee.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1 0 > gramacylee.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1 0 > gramacylee.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 10 0 > gramacylee.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 10 0 > gramacylee.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 10 0 > gramacylee.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 10 0 > gramacylee.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 100 0 > gramacylee.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 100 0 > gramacylee.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 100 0 > gramacylee.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 100 0 > gramacylee.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000 1000 0 > gramacylee.1k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 10000 1000 0 > gramacylee.10k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 100000 1000 0 > gramacylee.100k.1000.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingContinuousProblems 1000000 1000 0 > gramacylee.1000k.1000.txt
 
 .PHONY: analysisGL
 analysisGL:
@@ -180,10 +180,10 @@ analysis256: analysisOnemax256 analysisTwomax256 analysisTrap256 analysisPorcupi
 
 .PHONY: holland240
 holland240:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 1000 > holland240.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 10000 > holland240.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 100000 > holland240.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingHolland 1000000 > holland240.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingHolland 1000 > holland240.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingHolland 10000 > holland240.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingHolland 100000 > holland240.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingHolland 1000000 > holland240.1000k.1.txt
 
 .PHONY: analysisHolland240
 analysisHolland240:
@@ -197,14 +197,14 @@ analysisHolland240:
 
 .PHONY: royal256
 royal256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000 false > R1.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 10000 false > R1.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 100000 false > R1.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000000 false > R1.1000k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000 true > R2.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 10000 true > R2.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 100000 true > R2.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingRoyalRoads 1000000 true > R2.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 1000 false > R1.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 10000 false > R1.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 100000 false > R1.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 1000000 false > R1.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 1000 true > R2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 10000 true > R2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 100000 true > R2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingRoyalRoads 1000000 true > R2.1000k.1.txt
 
 .PHONY: analysisRoyal256
 analysisRoyal256:
@@ -222,10 +222,10 @@ analysisRoyal256:
 	
 .PHONY: mix256
 mix256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000 fixed > mix256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 10000 fixed > mix256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 100000 fixed > mix256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingMix 1000000 fixed > mix256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingMix 1000 fixed > mix256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingMix 10000 fixed > mix256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingMix 100000 fixed > mix256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingMix 1000000 fixed > mix256.1000k.1.txt
 
 .PHONY: analysisMix256
 analysisMix256:
@@ -239,10 +239,10 @@ analysisMix256:
 
 .PHONY: porcupine256
 porcupine256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 1000 fixed > porcupine256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 10000 fixed > porcupine256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 100000 fixed > porcupine256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPorcupine 1000000 fixed > porcupine256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPorcupine 1000 fixed > porcupine256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPorcupine 10000 fixed > porcupine256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPorcupine 100000 fixed > porcupine256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPorcupine 1000000 fixed > porcupine256.1000k.1.txt
 
 .PHONY: analysisPorcupine256
 analysisPorcupine256:
@@ -256,10 +256,10 @@ analysisPorcupine256:
 	
 .PHONY: plateaus256
 plateaus256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 1000 fixed > plateaus256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 10000 fixed > plateaus256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 100000 fixed > plateaus256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingPlateaus 1000000 fixed > plateaus256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPlateaus 1000 fixed > plateaus256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPlateaus 10000 fixed > plateaus256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPlateaus 100000 fixed > plateaus256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingPlateaus 1000000 fixed > plateaus256.1000k.1.txt
 
 .PHONY: analysisPlateaus256
 analysisPlateaus256:
@@ -273,10 +273,10 @@ analysisPlateaus256:
 
 .PHONY: trap256
 trap256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 1000 fixed > trap256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 10000 fixed > trap256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 100000 fixed > trap256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTrap 1000000 fixed > trap256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTrap 1000 fixed > trap256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTrap 10000 fixed > trap256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTrap 100000 fixed > trap256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTrap 1000000 fixed > trap256.1000k.1.txt
 
 .PHONY: analysisTrap256
 analysisTrap256:
@@ -290,10 +290,10 @@ analysisTrap256:
 
 .PHONY: twomax256
 twomax256:
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000 fixed > twomax256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 10000 fixed > twomax256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 100000 fixed > twomax256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingTwoMax 1000000 fixed > twomax256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTwoMax 1000 fixed > twomax256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTwoMax 10000 fixed > twomax256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTwoMax 100000 fixed > twomax256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTwoMax 1000000 fixed > twomax256.1000k.1.txt
 
 .PHONY: analysisTwomax256
 analysisTwomax256:
@@ -307,18 +307,18 @@ analysisTwomax256:
 
 .PHONY: onemax256
 onemax256: 
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 1 fixed > onemax256.1k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 1 fixed > onemax256.10k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 1 fixed > onemax256.100k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 1 fixed > onemax256.1000k.1.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 10 fixed > onemax256.1k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 10 fixed > onemax256.10k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 10 fixed > onemax256.100k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 10 fixed > onemax256.1000k.10.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000 100 fixed > onemax256.1k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 10000 100 fixed > onemax256.10k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 100000 100 fixed > onemax256.100k.100.txt
-	java -cp ${JARFILE} org.cicirello.experiments.variationsoflam.LamTrackingOneMax 1000000 100 fixed > onemax256.1000k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000 1 fixed > onemax256.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 10000 1 fixed > onemax256.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 100000 1 fixed > onemax256.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000000 1 fixed > onemax256.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000 10 fixed > onemax256.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 10000 10 fixed > onemax256.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 100000 10 fixed > onemax256.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000000 10 fixed > onemax256.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000 100 fixed > onemax256.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 10000 100 fixed > onemax256.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 100000 100 fixed > onemax256.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingOneMax 1000000 100 fixed > onemax256.1000k.100.txt
 		
 .PHONY: analysisOnemax256
 analysisOnemax256:

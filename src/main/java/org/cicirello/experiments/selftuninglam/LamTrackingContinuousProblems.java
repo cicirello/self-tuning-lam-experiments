@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.cicirello.experiments.variationsoflam;
+package org.cicirello.experiments.selftuninglam;
 
 import org.cicirello.search.problems.OptimizationProblem;
 import org.cicirello.search.representations.SingleReal;

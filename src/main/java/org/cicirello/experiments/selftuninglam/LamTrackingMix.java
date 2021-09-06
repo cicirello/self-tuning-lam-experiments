@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.cicirello.experiments.variationsoflam;
+package org.cicirello.experiments.selftuninglam;
 
 import org.cicirello.search.operators.bits.BitVectorInitializer;
 import org.cicirello.search.operators.bits.DefiniteBitFlipMutation;
-import org.cicirello.search.problems.Trap;
+import org.cicirello.search.problems.Mix;
 import org.cicirello.search.representations.BitVector;
 import org.cicirello.search.sa.ModifiedLam;
 import org.cicirello.search.sa.SimulatedAnnealing;
@@ -29,7 +29,7 @@ import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.SolutionCostPair;
 import org.cicirello.search.ProgressTracker;
 
-public class LamTrackingTrap {
+public class LamTrackingMix {
 	
 	/**
 	 * Runs the experiment.
@@ -52,7 +52,7 @@ public class LamTrackingTrap {
 			: (RUN_LENGTH >= 10000 ? 800 : 200)));
 		
 		final int BIT_LENGTH = BITS; 
-		Trap problem = new Trap();
+		Mix problem = new Mix();
 		final int MAX_BITS_MUTATE = 1;
 		
 		AcceptanceTracker modifiedLam = new AcceptanceTracker(new ModifiedLam());
