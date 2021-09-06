@@ -29,6 +29,19 @@ import org.cicirello.search.sa.AcceptanceTracker;
 import org.cicirello.search.SolutionCostPair;
 import org.cicirello.search.ProgressTracker;
 
+/**
+ * <p>Driver program for experiment comparing how well the new
+ * Self-Tuning Lam annealing schedule follows the target idealized
+ * acceptance rate vs how well the Modified Lam annealing schedule
+ * follows the target idealized acceptance rate. This driver
+ * program does this specifically for Ackley's Porcupine Problem. 
+ * In addition to acceptance rate data, it
+ * also outputs the optimization objective function values for
+ * all of the runs.</p>
+ *
+ * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
+ * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
+ */
 public class LamTrackingPorcupine {
 	
 	/**

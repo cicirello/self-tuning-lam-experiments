@@ -31,7 +31,19 @@ import org.cicirello.search.ProgressTracker;
 import org.cicirello.search.operators.reals.UndoableGaussianMutation;
 import org.cicirello.search.problems.CostFunctionScaler;
 
-
+/**
+ * <p>Driver program for experiment comparing how well the new
+ * Self-Tuning Lam annealing schedule follows the target idealized
+ * acceptance rate vs how well the Modified Lam annealing schedule
+ * follows the target idealized acceptance rate. This driver
+ * program does this specifically for three continuous function
+ * optimization problems. In addition to acceptance rate data, it
+ * also outputs the optimization objective function values for
+ * all of the runs.</p>
+ *
+ * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
+ * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
+ */
 public class LamTrackingContinuousProblems {
 	
 	/**
@@ -124,6 +136,13 @@ public class LamTrackingContinuousProblems {
 
 	}
 	
+	/**
+	 * <p>A continuous function with a large number of local minimums, and
+	 * a single global minimum.</p>
+	 *
+	 * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
+	 * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
+	 */
 	public static class GramacyLee2012 implements OptimizationProblem<SingleReal>, Initializer<SingleReal> {
 		
 		// many local minima
@@ -159,6 +178,13 @@ public class LamTrackingContinuousProblems {
 		}
 	}
 	
+	/**
+	 * <p>A continuous function with a single suboptimal local minimum, and
+	 * a single global minimum, and a 0 derivative inflexion point.</p>
+	 *
+	 * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
+	 * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
+	 */
 	public static class ForresterEtAl2008 implements OptimizationProblem<SingleReal>, Initializer<SingleReal> {
 		
 		// 1 global minima, 1 local minima, and 0 gradient inflection point.
