@@ -5,17 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
  
 	<groupId>org.cicirello</groupId>
-	<artifactId>variations-on-lam-annealing</artifactId>
+	<artifactId>self-tuning-lam-experiments</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
   
-	<name>Experiments with New Variations of the Lam Annealing Schedule</name>
+	<name>Experiments with the Self-Tuning Lam Annealing Schedule</name>
 	
-	<description>This package includes experiments with new variations 
-	of the Modified Lam annealing schedule.
+	<description>This package includes experiments with the  
+	Self-Tuning Lam annealing schedule.
 	</description>
 	
-	<url>https://github.com/cicirello/variations-on-lam-annealing</url>
+	<url>https://github.com/cicirello/self-tuning-lam-experiments</url>
 
 	<licenses>
 		<license>
@@ -23,7 +23,7 @@
 		<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
 		<distribution>repo</distribution>
 		<comments>
-		Experiments with New Variations of the Lam Annealing Schedule.
+		Experiments with the Self-Tuning Lam Annealing Schedule.
 		Copyright (C) 2021  Vincent A. Cicirello.
  
 		This program is free software: you can redistribute it and/or modify
@@ -114,7 +114,7 @@
 				<repository>
 					<id>github</id>
 					<name>GitHub cicirello Apache Maven Packages</name>
-					<url>https://maven.pkg.github.com/cicirello/variations-on-lam-annealing</url>
+					<url>https://maven.pkg.github.com/cicirello/self-tuning-lam-experiments</url>
 				</repository>
 			</distributionManagement>
 		</profile>
@@ -148,13 +148,13 @@
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/cicirello/variations-on-lam-annealing/issues</url>
+		<url>https://github.com/cicirello/self-tuning-lam-experiments/issues</url>
 	</issueManagement>
 	
 	<scm>
-		<connection>scm:git:git://github.com/cicirello/variations-on-lam-annealing.git</connection>
-		<developerConnection>scm:git:ssh://github.com:cicirello/variations-on-lam-annealing.git</developerConnection>
-		<url>http://github.com/cicirello/variations-on-lam-annealing/tree/main</url>
+		<connection>scm:git:git://github.com/cicirello/self-tuning-lam-experiments.git</connection>
+		<developerConnection>scm:git:ssh://github.com:cicirello/self-tuning-lam-experiments.git</developerConnection>
+		<url>http://github.com/cicirello/self-tuning-lam-experiments/tree/main</url>
 	</scm>
   
 	<dependencies>
@@ -214,8 +214,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<windowtitle>Experiments with New Variations of the Lam Annealing Schedule</windowtitle>
-					<doctitle>Experiments with New Variations of the Lam Annealing Schedule</doctitle>
+					<windowtitle>Experiments with the Self-Tuning Lam Annealing Schedule</windowtitle>
+					<doctitle>Experiments with the Self-Tuning Lam Annealing Schedule</doctitle>
 					<author>true</author>
 					<version>false</version>
 					<notimestamp>true</notimestamp>
