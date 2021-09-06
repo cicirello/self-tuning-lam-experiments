@@ -104,7 +104,7 @@ public class RuntimeComparison {
 		final int WARMUP_RUN_LENGTH = 128000;
 		final int NUM_SAMPLES = 100;
 		final int MIN_RUNLENGTH = 1000;
-		final int MAX_RUNLENGTH = 1024000;
+		final int MAX_RUNLENGTH = 8192000;
 		
 		// Warm up JVM prior to timing alternatives
 		double totalDiff = 0;
@@ -129,23 +129,16 @@ public class RuntimeComparison {
 		for (int L = MIN_RUNLENGTH; L <= MAX_RUNLENGTH; L *= 2) {
 			for (int i = 0; i < NUM_SAMPLES; i++) {
 				long start = bean.getCurrentThreadCpuTime();
-				double x = 0;
-				for (int j = 0; j < NUM_SAMPLES; j++) {
-					x += runModifiedLam(L);
-				}
+				double x =  runModifiedLam(L);
 				long mid = bean.getCurrentThreadCpuTime();
-				double y = 0;
-				for (int j = 0; j < NUM_SAMPLES; j++) {
-					y += runSelfTuningLam(L);
-				}
+				double y = runSelfTuningLam(L);
 				long end = bean.getCurrentThreadCpuTime();
 				// Do something with return values to avoid JVM from optimizing away the calls.
-				totalDiff += (x-y);
-				
-				System.out.printf("%7d\t%12.2f\t%12.2f\n",
+				totalDiff += (x-y);				
+				System.out.printf("%7d\t%12d\t%12d\n",
 					L,
-					(mid-start)/((double)NUM_SAMPLES),
-					(end-mid)/((double)NUM_SAMPLES)
+					(mid-start),
+					(end-mid)
 				);
 			}
 		}
