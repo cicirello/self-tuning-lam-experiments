@@ -53,8 +53,8 @@ if __name__ == "__main__" :
                 break
             values = line.split()
             key = int(values[0])
-            cpu1 = float(values[1])
-            cpu2 = float(values[2])
+            cpu1 = int(values[1])
+            cpu2 = int(values[2])
             if key in lengthMap :
                 lengthMap[key].addDataPoint(cpu1, cpu2)
             else :
@@ -70,10 +70,10 @@ if __name__ == "__main__" :
         "t-cpu",
         "P-cpu"))
     outputTemplate = "{0:7d}\t{1:.5f}\t{2:.5f}\t{3:.5f}\t{4:.5f}\t{5:3d}\t{6:.2f}\t{7:.2g}"
-    for key in sorted(lengthMap.keys()) :
-        if min(lengthMap[key].cpu1) > 0 and min(lengthMap[key].cpu2) > 0 : 
-            muCpu1 = statistics.mean(lengthMap[key].cpu1)
-            muCpu2 = statistics.mean(lengthMap[key].cpu2)
+    for key in sorted(lengthMap.keys()) : 
+        muCpu1 = statistics.mean(lengthMap[key].cpu1)
+        muCpu2 = statistics.mean(lengthMap[key].cpu2)
+        if muCpu1 >= 1E-10 and muCpu2 >= 1E-10 :
             stdevCpu1 = statistics.stdev(lengthMap[key].cpu1)
             stdevCpu2 = statistics.stdev(lengthMap[key].cpu2)
             n = len(lengthMap[key].cpu1)
@@ -94,4 +94,4 @@ if __name__ == "__main__" :
                 n,
                 cpuTTest.statistic,
                 cpuTTest.pvalue))
-    
+
