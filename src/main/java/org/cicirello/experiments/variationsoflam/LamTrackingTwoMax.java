@@ -1,5 +1,5 @@
 /*
- * Experiments with variations of Lam annealing.
+ * Experiments with the Self-Tuning Lam Annealing Schedule.
  * Copyright (C) 2021  Vincent A. Cicirello
  *
  * This program is free software: you can redistribute it and/or modify
