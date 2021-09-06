@@ -27,13 +27,20 @@ specialFigures:
 experiments: experimentsContinuous experiments256 timing
 
 .PHONY: analysis
-analysis: analysisContinuous analysis256
+analysis: analysisContinuous analysis256 timingAnalysis
 
 # Runs timing experiment
 
 .PHONY: timing
 timing:
 		java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.RuntimeComparison > timing.txt
+
+.PHONY: timingAnalysis
+timingAnalysis:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/SummarizeTimingData.py ${pathToDataFiles}timing.txt > timing.summary.data.txt
 
 # Runs all continuous optimization problems
 
