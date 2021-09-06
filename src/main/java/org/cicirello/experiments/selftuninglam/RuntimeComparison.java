@@ -101,10 +101,11 @@ public class RuntimeComparison {
 	 */
     public static void main(String[] args) {
 		final int WARMUP_NUM_SAMPLES = 100;
-		final int WARMUP_RUN_LENGTH = 128000;
 		final int NUM_SAMPLES = 100;
 		final int MIN_RUNLENGTH = 1000;
 		final int MAX_RUNLENGTH = 8192000;
+		final int WARMUP_RUN_LENGTH = MAX_RUNLENGTH;
+		
 		
 		// Warm up JVM prior to timing alternatives
 		double totalDiff = 0;
