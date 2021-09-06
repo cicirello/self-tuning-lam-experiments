@@ -24,10 +24,16 @@ specialFigures:
 # Runs all experiments
 
 .PHONY: experiments
-experiments: experimentsContinuous experiments256
+experiments: experimentsContinuous experiments256 timing
 
 .PHONY: analysis
 analysis: analysisContinuous analysis256
+
+# Runs timing experiment
+
+.PHONY: timing
+timing:
+		java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.RuntimeComparison > timing.txt
 
 # Runs all continuous optimization problems
 
