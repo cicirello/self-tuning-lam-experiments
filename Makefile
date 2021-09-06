@@ -4,7 +4,7 @@ else
 	py = "python3"
 endif
 
-JARFILE = "target/variations-on-lam-annealing-1.0.0-jar-with-dependencies.jar"
+JARFILE = "target/self-tuning-lam-experiments-1.0.0-jar-with-dependencies.jar"
 pathToDataFiles = "data/"
 
 .PHONY: build
