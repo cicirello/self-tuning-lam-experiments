@@ -62,10 +62,13 @@ public class RuntimeComparison {
 		long count = 0;
 		lam.init(runLength);
 		double currentCost = 1000;
+		int interval = runLength >> 3;
+		int j = 1;
 		for (int i = 0; i < runLength; i++) {
+			if (i % interval == 0) j *= 2;
 			double neighborCost = currentCost;
-			if (i % 2 == 0) neighborCost = neighborCost + i % 1000;
-			else neighborCost = neighborCost - i % 1000;
+			if (i % j == 0) neighborCost = neighborCost - 1 - (i % 1000);
+			else neighborCost = neighborCost + 1 + (i % 1000);
 			if (lam.accept(neighborCost, currentCost)) count = count + 1;
 		}
 		return 1.0 * count;
@@ -86,10 +89,13 @@ public class RuntimeComparison {
 		long count = 0;
 		lam.init(runLength);
 		double currentCost = 1000;
+		int interval = runLength >> 3;
+		int j = 1;
 		for (int i = 0; i < runLength; i++) {
+			if (i % interval == 0) j *= 2;
 			double neighborCost = currentCost;
-			if (i % 2 == 0) neighborCost = neighborCost + i % 1000;
-			else neighborCost = neighborCost - i % 1000;
+			if (i % j == 0) neighborCost = neighborCost - 1 - (i % 1000);
+			else neighborCost = neighborCost + 1 + (i % 1000);
 			if (lam.accept(neighborCost, currentCost)) count = count + 1;
 		}
 		return 1.0 * count;
