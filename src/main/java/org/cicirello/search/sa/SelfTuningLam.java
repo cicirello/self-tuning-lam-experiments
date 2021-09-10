@@ -23,8 +23,6 @@ package org.cicirello.search.sa;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * <p>UPDATE THIS BEFORE MAKING IT PUBLIC</p>
- *
  * <p>This class implements the Self-Tuning Lam annealing schedule, which is
  * an improved variation of the Modified Lam annealing schedule. The original 
  * Modified Lam annealing schedule dynamically
@@ -41,9 +39,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * Lam schedule is a new variation that uses early samples of the cost function
  * to fine-tune several annealing parameters to almost instantaneously achieve
  * the target rate of acceptance, and to better match it throughout the run.
- * This Self-Tuning Lam schedule is not sensitive to cost function value magnitude,
+ * This Self-Tuning Lam schedule is not sensitive to cost function scale,
  * nor to run length.</p>
- *
  *
  * <p>For details of the original Modified Lam, as well as prior optimizations,
  * see the following papers:</p>
@@ -73,7 +70,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
  * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
- * @version 1.22.2021
+ * @version 9.10.2021
  */
 public final class SelfTuningLam implements AnnealingSchedule {
 	
