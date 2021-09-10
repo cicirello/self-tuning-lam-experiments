@@ -58,10 +58,12 @@ make build
 ```
 
 This produces a jar file containing 10 Java programs for running 
-different parts of the experiments. If you are unfamiliar with the 
-usual structure of the directories of a Java project built with Maven,
-the `.class` files, the `.jar` file, etc will be found in a `target` 
-directory that is created by the build process.
+different parts of the experiments. The jar also contains all
+dependencies, including the Chips-n-Salsa library and its dependencies.
+If you are unfamiliar with the usual structure of the directories of 
+a Java project built with Maven, the `.class` files, the `.jar` file, 
+etc will be found in a `target` directory that is created by the 
+build process.
 
 ## Running the Experiments
 
