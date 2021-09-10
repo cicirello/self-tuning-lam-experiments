@@ -78,6 +78,10 @@ with the results piped to text files in the root of the project. The
 output from my runs are found in the [/data](data) directory. Be aware that
 running all of the experiments will take quite a bit of time.
 
+There are also several other targets in the Makefile if you wish to 
+run only some of the experiments from the paper. See the Makefile for
+details.
+
 ## Analyzing the Experimental Data
 
 To run the Python program that I used to generate summary statistics, run 
