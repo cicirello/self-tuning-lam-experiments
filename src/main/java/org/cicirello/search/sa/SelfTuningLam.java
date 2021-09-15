@@ -42,6 +42,17 @@ import java.util.concurrent.ThreadLocalRandom;
  * This Self-Tuning Lam schedule is not sensitive to cost function scale,
  * nor to run length.</p>
  *
+ * <p>The Self-Tuning Lam is introduced in the following paper, including
+ * detailed description of the algorithm, derivations of the mechanisms used
+ * for self-tuning, and experiments across a range of problems demonstrating
+ * its ability to consistently and accurately follow Lam and Delosme's idealized
+ * rate of neighbor acceptance, independent of run length and cost function scale:</p>
+ * <ul>
+ * <li>Vincent A. Cicirello. 2021. 
+ * Self-Tuning Lam Annealing: Learning Hyperparameters While Problem Solving. 
+ * Preprint, under review (September 2021).</li>
+ * </ul>
+ *
  * <p>For details of the original Modified Lam, as well as prior optimizations,
  * see the following papers:</p>
  * <ul>
@@ -70,7 +81,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
  * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
- * @version 9.10.2021
+ * @version 9.15.2021
  */
 public final class SelfTuningLam implements AnnealingSchedule {
 	
