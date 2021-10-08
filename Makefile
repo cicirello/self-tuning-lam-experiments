@@ -42,6 +42,25 @@ timingAnalysis:
 	$(py) -m pip install --user matplotlib
 	$(py) src/analysis/SummarizeTimingData.py ${pathToDataFiles}timing.txt > timing.summary.data.txt
 
+# Runs common duedate experiments
+
+.PHONY: experimentsScheduling
+experimentsScheduling:
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingSchedulingWithSetups 1000 > sched.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingSchedulingWithSetups 10000 > sched.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingSchedulingWithSetups 100000 > sched.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingSchedulingWithSetups 1000000 > sched.1000k.1.txt
+	
+.PHONY: analysisScheduling
+analysisScheduling:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}sched.1k.1.txt > sched.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}sched.10k.1.txt >> sched.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}sched.100k.1.txt >> sched.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStats.py ${pathToDataFiles}sched.1000k.1.txt >> sched.summary.data.txt
+
 # Runs all continuous optimization problems
 
 .PHONY: experimentsContinuous
