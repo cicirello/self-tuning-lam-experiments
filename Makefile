@@ -24,10 +24,10 @@ specialFigures:
 # Runs all experiments
 
 .PHONY: experiments
-experiments: experimentsContinuous experiments256 timing
+experiments: experimentsContinuous experiments256 experimentsTSP2 timing
 
 .PHONY: analysis
-analysis: analysisContinuous analysis256 timingAnalysis
+analysis: analysisContinuous analysis256 analysisTSP2 timingAnalysis
 
 # Runs timing experiment
 
