@@ -19,7 +19,7 @@
 package org.cicirello.experiments.selftuninglam;
 
 import org.cicirello.search.problems.OptimizationProblem;
-import org.cicirello.search.operators.permutations.InsertionMutation;
+import org.cicirello.search.operators.permutations.ThreeOptMutation;
 import org.cicirello.search.operators.permutations.PermutationInitializer;
 import org.cicirello.permutations.Permutation;
 import org.cicirello.search.sa.ModifiedLam;
@@ -67,14 +67,14 @@ public class LamTrackingTSP {
 			
 			SimulatedAnnealing<Permutation> sa1 = new SimulatedAnnealing<Permutation>(
 				problem, 
-				new InsertionMutation(),
+				new ThreeOptMutation(),
 				new PermutationInitializer(NUM_CITIES),
 				modifiedLam
 			);
 			
 			SimulatedAnnealing<Permutation> sa2 = new SimulatedAnnealing<Permutation>(
 				problem, 
-				new InsertionMutation(),
+				new ThreeOptMutation(),
 				new PermutationInitializer(NUM_CITIES),
 				selfTuningLam
 			);
