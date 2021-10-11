@@ -18,7 +18,7 @@
 
 package org.cicirello.experiments.selftuninglam;
 
-import org.cicirello.search.problems.IntegerCostOptimizationProblem;
+import org.cicirello.search.problems.OptimizationProblem;
 import org.cicirello.search.operators.permutations.InsertionMutation;
 import org.cicirello.search.operators.permutations.PermutationInitializer;
 import org.cicirello.permutations.Permutation;
@@ -109,7 +109,7 @@ public class LamTrackingTSP {
 	 * @author <a href=https://www.cicirello.org/ target=_top>Vincent A. Cicirello</a>, 
 	 * <a href=https://www.cicirello.org/ target=_top>https://www.cicirello.org/</a>
 	 */
-	public static class TSP implements IntegerCostOptimizationProblem<Permutation> {
+	public static class TSP implements OptimizationProblem<Permutation> {
 		
 		private final double[] x;
 		private final double[] y;
@@ -120,7 +120,7 @@ public class LamTrackingTSP {
 		 * @param width Cities are uniformly dispersed within a width x width square.
 		 * @param seed Seed for the random number generator to enable replication.
 		 */
-		public TSP(int n, int width, int seed) {
+		public TSP(int n, double width, int seed) {
 			SplittableRandom gen = new SplittableRandom(seed);
 			x = new double[n];
 			y = new double[n];
@@ -131,26 +131,26 @@ public class LamTrackingTSP {
 		}
 		
 		@Override
-		public int cost(Permutation candidate) {
+		public double cost(Permutation candidate) {
 			if (candidate.length() != x.length) {
 				throw new IllegalArgumentException("Permutation must be same length as number of cities.");
 			}
-			int total = edgeCost(candidate.get(0), candidate.get(candidate.length()-1));
+			double total = edgeCost(candidate.get(0), candidate.get(candidate.length()-1));
 			for (int i = 1; i < candidate.length(); i++) {
-				total += edgeCost(candidate.get(i), candidate.get(i-1));
+				total = total + edgeCost(candidate.get(i), candidate.get(i-1));
 			}
 			return total;
 		}
 		
 		@Override
-		public int value(Permutation candidate) {
+		public double value(Permutation candidate) {
 			return cost(candidate);
 		}
 		
-		private int edgeCost(int i, int j) {
+		private double edgeCost(int i, int j) {
 			double deltaX = x[i] - x[j];
 			double deltaY = y[i] - y[j];
-			return (int)Math.round(Math.sqrt(deltaX*deltaX + deltaY*deltaY));
+			return Math.sqrt(deltaX*deltaX + deltaY*deltaY);
 		}
 	}
 }
