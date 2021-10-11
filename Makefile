@@ -44,8 +44,8 @@ timingAnalysis:
 
 # Runs TSP experiments
 
-.PHONY: experimentsTSP
-experimentsTSP:
+.PHONY: experimentsTSP3
+experimentsTSP3:
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 1000 1 > tsp.1k.1.txt
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 10000 1 > tsp.10k.1.txt
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 100000 1 > tsp.100k.1.txt
@@ -58,9 +58,24 @@ experimentsTSP:
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 1000000 1 > tsp.1000k.1.txt
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 1000000 10 > tsp.1000k.10.txt
 	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP 1000000 100 > tsp.1000k.100.txt
+
+.PHONY: experimentsTSP2
+experimentsTSP2:
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 1 > tsp2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 1 > tsp2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 1 > tsp2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 10 > tsp2.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 10 > tsp2.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 10 > tsp2.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 100 > tsp2.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 100 > tsp2.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 100 > tsp2.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 1 > tsp2.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 10 > tsp2.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 100 > tsp2.1000k.100.txt
 	
-.PHONY: analysisTSP
-analysisTSP:
+.PHONY: analysisTSP3
+analysisTSP3:
 	$(py) -m pip install --user pycairo
 	$(py) -m pip install --user scipy
 	$(py) -m pip install --user matplotlib
@@ -76,6 +91,24 @@ analysisTSP:
 	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp.10k.100.txt >> tsp.summary.data.txt
 	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp.100k.100.txt >> tsp.summary.data.txt
 	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp.1000k.100.txt >> tsp.summary.data.txt
+
+.PHONY: analysisTSP2
+analysisTSP2:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.1.txt > tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.100.txt >> tsp2.summary.data.txt
 	
 
 # Runs all continuous optimization problems
