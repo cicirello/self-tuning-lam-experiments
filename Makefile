@@ -24,10 +24,10 @@ specialFigures:
 # Runs all experiments
 
 .PHONY: experiments
-experiments: experimentsContinuous experiments256 timing
+experiments: experimentsContinuous experiments256 experimentsTSP2 timing
 
 .PHONY: analysis
-analysis: analysisContinuous analysis256 timingAnalysis
+analysis: analysisContinuous analysis256 analysisTSP2 timingAnalysis
 
 # Runs timing experiment
 
@@ -41,6 +41,42 @@ timingAnalysis:
 	$(py) -m pip install --user scipy
 	$(py) -m pip install --user matplotlib
 	$(py) src/analysis/SummarizeTimingData.py ${pathToDataFiles}timing.txt > timing.summary.data.txt
+
+# Runs TSP experiments
+
+.PHONY: experimentsTSP2
+experimentsTSP2:
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 1 > tsp2.1k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 1 > tsp2.10k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 1 > tsp2.100k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 10 > tsp2.1k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 10 > tsp2.10k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 10 > tsp2.100k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000 100 > tsp2.1k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 10000 100 > tsp2.10k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 100000 100 > tsp2.100k.100.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 1 > tsp2.1000k.1.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 10 > tsp2.1000k.10.txt
+	java -cp ${JARFILE} org.cicirello.experiments.selftuninglam.LamTrackingTSP2 1000000 100 > tsp2.1000k.100.txt
+	
+.PHONY: analysisTSP2
+analysisTSP2:
+	$(py) -m pip install --user pycairo
+	$(py) -m pip install --user scipy
+	$(py) -m pip install --user matplotlib
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.1.txt > tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.1.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.10.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.10k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.100k.100.txt >> tsp2.summary.data.txt
+	$(py) src/analysis/AcceptanceRateStatsFloatingPointPaired.py ${pathToDataFiles}tsp2.1000k.100.txt >> tsp2.summary.data.txt
+	
 
 # Runs all continuous optimization problems
 
