@@ -48,7 +48,8 @@ public class LamTrackingTSP2 {
 	/**
 	 * Runs the experiment.
 	 * @param args There are command line arguments. args[0] is
-	 * the length of the simulated annealing runs in maximum number of evaluations. 
+	 * the length of the simulated annealing runs in maximum number of evaluations.
+	 * args[1] is the size of the area containing the cities.
 	 */
 	public static void main(String[] args) {
 		final int RUN_LENGTH = Integer.parseInt(args[0]);
