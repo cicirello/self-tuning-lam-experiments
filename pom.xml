@@ -14,7 +14,9 @@
 	<description>This package contains Java programs for reproducing the 
 	experiments, and analysis of experimental data, from the following 
 	article: Vincent A. Cicirello. 2021. Self-Tuning Lam Annealing: Learning 
-	Hyperparameters While Problem Solving. Preprint, under review (September 2021).
+	Hyperparameters While Problem Solving. Applied Sciences, 11, 21, Article 
+	9828 (November 2021). https://doi.org/10.3390/app11219828. Also available
+	at: https://www.cicirello.org/publications/applsci-11-09828.pdf
 	</description>
 	
 	<url>https://github.com/cicirello/self-tuning-lam-experiments</url>
