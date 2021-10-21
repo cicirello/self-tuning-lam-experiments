@@ -7,9 +7,9 @@ experimental data, from the following paper:
 
 > Vincent A. Cicirello. 2021. Self-Tuning Lam Annealing: Learning Hyperparameters While Problem Solving. Preprint, under review (September 2021). 
 
-| | |
+| __Related Publication__ | [![DOI](doi.svg)](https://doi.org/10.3390/app11219828) |
 | :--- | :--- |
-| __Source Info:__ | [![GitHub](https://img.shields.io/github/license/cicirello/self-tuning-lam-experiments)](LICENSE) |
+| __Source Info__ | [![GitHub](https://img.shields.io/github/license/cicirello/self-tuning-lam-experiments)](LICENSE) |
 
 ## Requirements to Build and Run the Experiments
 
