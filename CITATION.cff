@@ -1,0 +1,22 @@
+cff-version: "1.1.0"
+message: "If you use this software, please cite it using these metadata."
+authors: 
+- family-names: "Cicirello"
+  given-names: "Vincent A"
+  orcid: "https://orcid.org/0000-0003-1072-8559"
+title: "self-tuning-lam-experiments"
+license: "GPL-3.0-or-later"
+url: "https://github.com/cicirello/self-tuning-lam-experiments"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Cicirello"
+    given-names: "Vincent A"
+    orcid: "https://orcid.org/0000-0003-1072-8559"
+  doi: "10.3390/app11219828"
+  journal: "Applied Sciences"
+  title: "Self-Tuning Lam Annealing: Learning Hyperparameters While Problem Solving"
+  issue: 11
+  volume: 21
+  year: 2021
+  month: "November"
