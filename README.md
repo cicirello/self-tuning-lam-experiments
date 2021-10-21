@@ -5,7 +5,7 @@ Copyright &copy; 2021 Vincent A. Cicirello
 This repository contains code to reproduce the experiments, and analysis of 
 experimental data, from the following paper:
 
-> Vincent A. Cicirello. 2021. Self-Tuning Lam Annealing: Learning Hyperparameters While Problem Solving. Preprint, under review (September 2021). 
+> Vincent A. Cicirello. 2021. Self-Tuning Lam Annealing: Learning Hyperparameters While Problem Solving. *Applied Sciences* 11, 21, Article 9828 (November 2021). https://doi.org/10.3390/app11219828 
 
 | __Related Publication__ | [![DOI](doi.svg)](https://doi.org/10.3390/app11219828) |
 | :--- | :--- |
