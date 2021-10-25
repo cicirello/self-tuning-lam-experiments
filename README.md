@@ -38,7 +38,7 @@ To build and run the experiments on your own machine, you will need the followin
   and running Python programs, then you can just run these directly, although 
   the Makefile may be useful to see the specific commands needed.
 
-## Building the Java Programs
+## Building the Java Programs (Optiom 1)
 
 The source code of the Java programs, implementing the experiments
 is in the [src/main](src/main) directory.  You can build the experiment 
@@ -66,11 +66,27 @@ a Java project built with Maven, the `.class` files, the `.jar` file,
 etc will be found in a `target` directory that is created by the 
 build process.
 
+## Downloading a prebuilt jar (Option 2)
+
+As an alternative to building the jar (see above), you can choose to instead
+download a prebuilt jar of the experiments from the Maven Central repository.
+The Makefile contains a target that will do this for you, provided that you have
+curl installed on your system. To download the jar of the precompiled code of 
+the experiments, run the following from the root of the repository:
+
+```shell
+make download
+```
+
+The jar that it downloads contains the compiled code of the experiments as well
+as all dependencies, which would include the version of Chips-n-Salsa originally used
+for the paper, as well as its dependencies, all within a single jar file.
+
 ## Running the Experiments
 
-You must first follow the build instructions above. Once the jar of the experiments
-is built, you can then run the experiments with the following executed at the root
-of the repository:
+You must first either follow the build instructions or download a prebuilt jar (see above
+sections). Once the jar of the experiments is either built or downloaded, you can then run 
+the experiments with the following executed at the root of the repository:
 
 ```shell
 make experiments
