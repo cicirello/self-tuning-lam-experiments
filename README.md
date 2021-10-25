@@ -38,7 +38,7 @@ To build and run the experiments on your own machine, you will need the followin
   and running Python programs, then you can just run these directly, although 
   the Makefile may be useful to see the specific commands needed.
 
-## Building the Java Programs (Optiom 1)
+## Building the Java Programs (Option 1)
 
 The source code of the Java programs, implementing the experiments
 is in the [src/main](src/main) directory.  You can build the experiment 
