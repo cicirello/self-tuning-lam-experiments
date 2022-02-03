@@ -93,8 +93,8 @@ public class LamTrackingContinuousProblems {
 		AcceptanceTracker modifiedLam = new AcceptanceTracker(new ModifiedLam());
 		AcceptanceTracker selfTuningLam = new AcceptanceTracker(new SelfTuningLam());
 		
-		UndoableGaussianMutation<SingleReal> mutation1 = UndoableGaussianMutation.createGaussianMutation​(sigma);
-		UndoableGaussianMutation<SingleReal> mutation2 = UndoableGaussianMutation.createGaussianMutation​(sigma);
+		UndoableGaussianMutation<SingleReal> mutation1 = UndoableGaussianMutation.createGaussianMutation(sigma);
+		UndoableGaussianMutation<SingleReal> mutation2 = UndoableGaussianMutation.createGaussianMutation(sigma);
 		
 		SimulatedAnnealing<SingleReal> sa1 = new SimulatedAnnealing<SingleReal>(
 			scaled, 
@@ -154,16 +154,16 @@ public class LamTrackingContinuousProblems {
 		private final RealValueInitializer init;
 		
 		public GramacyLee2012() { 
-			init = new RealValueInitializer​(0.5, 2.5, 0.5, 2.5);
+			init = new RealValueInitializer(0.5, 2.5, 0.5, 2.5);
 		}
 		
 		@Override
-		public double cost​(SingleReal candidate) {
+		public double cost(SingleReal candidate) {
 			return 0.5*Math.sin(10*Math.PI*candidate.get())/candidate.get() + Math.pow(candidate.get()-1,4);
 		}
 		
 		@Override
-		public double value​(SingleReal candidate) {
+		public double value(SingleReal candidate) {
 			return cost(candidate);
 		} 
 		
@@ -209,11 +209,11 @@ public class LamTrackingContinuousProblems {
 				B = 10;
 				C = -5;
 			}
-			init = new RealValueInitializer​(0.0, 1.0, 0.0, 1.0);
+			init = new RealValueInitializer(0.0, 1.0, 0.0, 1.0);
 		}
 		
 		@Override
-		public double cost​(SingleReal candidate) {
+		public double cost(SingleReal candidate) {
 			if (ORIGINAL) {
 				return original(candidate);
 			} else {
@@ -222,7 +222,7 @@ public class LamTrackingContinuousProblems {
 		}
 		
 		@Override
-		public double value​(SingleReal candidate) {
+		public double value(SingleReal candidate) {
 			return cost(candidate);
 		}
 		
