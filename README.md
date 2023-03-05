@@ -10,7 +10,7 @@ experimental data, from the following paper:
 | __Related Publication__ | [![DOI](doi.svg)](https://doi.org/10.3390/app11219828) |
 | :--- | :--- |
 | __Source Info__ | [![GitHub](https://img.shields.io/github/license/cicirello/self-tuning-lam-experiments)](LICENSE) |
-| __Packages and Releases__ | [![Maven Central](https://img.shields.io/maven-central/v/org.cicirello/self-tuning-lam-experiments.svg?label=Maven%20Central)](https://search.maven.org/artifact/org.cicirello/self-tuning-lam-experiments) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/cicirello/self-tuning-lam-experiments?logo=GitHub)](https://github.com/cicirello/self-tuning-lam-experiments/releases) |
+| __Packages and Releases__ | [![Maven Central](https://img.shields.io/maven-central/v/org.cicirello/self-tuning-lam-experiments.svg?label=Maven%20Central)](https://central.sonatype.com/search?namespace=org.cicirello&q=self-tuning-lam-experiments) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/cicirello/self-tuning-lam-experiments?logo=GitHub)](https://github.com/cicirello/self-tuning-lam-experiments/releases) |
 
 ## Requirements to Build and Run the Experiments
 
