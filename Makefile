@@ -18,7 +18,7 @@ ifeq ($(OS),Windows_NT)
 else
 	mkdir -p target
 endif
-	cd target && curl -O -J -L  "https://search.maven.org/classic/remotecontent?filepath=org/cicirello/self-tuning-lam-experiments/1.0.0/self-tuning-lam-experiments-1.0.0-jar-with-dependencies.jar"
+	cd target && curl -O -J -L  "https://repo1.maven.org/maven2/org/cicirello/self-tuning-lam-experiments/1.0.0/self-tuning-lam-experiments-1.0.0-jar-with-dependencies.jar"
 
 # Generates special figures for paper
 
